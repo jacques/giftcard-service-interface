@@ -8,3 +8,5 @@ test-output/
 log/
 *.iml
 .idea
+
+.DS_Store
