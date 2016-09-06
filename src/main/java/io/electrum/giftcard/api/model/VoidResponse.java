@@ -3,6 +3,7 @@ package io.electrum.giftcard.api.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,13 +14,13 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Information about the outcome of voiding process.")
 public class VoidResponse extends Transaction {
 
-   private GiftcardAmounts amounts = null;
+   private Amounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
    private SlipData slipData = null;
 
-   public VoidResponse amounts(GiftcardAmounts amounts) {
+   public VoidResponse amounts(Amounts amounts) {
       this.amounts = amounts;
       return this;
    }
@@ -31,11 +32,11 @@ public class VoidResponse extends Transaction {
     **/
    @ApiModelProperty(value = "Specifies the balance of the gift card when it was voided.")
    @JsonProperty("amounts")
-   public GiftcardAmounts getAmounts() {
+   public Amounts getAmounts() {
       return amounts;
    }
 
-   public void setAmounts(GiftcardAmounts amounts) {
+   public void setAmounts(Amounts amounts) {
       this.amounts = amounts;
    }
 

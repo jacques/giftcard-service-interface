@@ -3,6 +3,7 @@ package io.electrum.giftcard.api.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,12 +14,12 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Information about the gift card activation.")
 public class ActivationRequest extends Transaction {
 
-   private GiftcardAmounts amounts = null;
+   private Amounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
 
-   public ActivationRequest amounts(GiftcardAmounts amounts) {
+   public ActivationRequest amounts(Amounts amounts) {
       this.amounts = amounts;
       return this;
    }
@@ -30,11 +31,11 @@ public class ActivationRequest extends Transaction {
     **/
    @ApiModelProperty(value = "Specifies an amount which should be loaded onto the card as part of the activation.")
    @JsonProperty("amounts")
-   public GiftcardAmounts getAmounts() {
+   public Amounts getAmounts() {
       return amounts;
    }
 
-   public void setAmounts(GiftcardAmounts amounts) {
+   public void setAmounts(Amounts amounts) {
       this.amounts = amounts;
    }
 
