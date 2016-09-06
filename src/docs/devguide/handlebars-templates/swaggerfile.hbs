@@ -1,0 +1,135 @@
+{{#info}}
+
+**Version** {{version}}
+
+{{description}}
+
+{{#contact}}Email [**{{name}}**](mailto:{{email}}){{/contact}}
+
+{{#license}}Licensed under [**{{name}}**]({{url}}){{/license}}
+
+{{/info}}
+
+{{#if consumes}}**Consumes:** {{join consumes ", "}}{{/if}}
+
+{{#if produces}}**Produces:** {{join produces ", "}}{{/if}}
+
+{{#if securityDefinitions}}
+# Security Definitions
+{{/if}}
+{{> security}}
+
+# Operations
+
+{{#each paths}}
+
+{{#get}}
+## {{operationId}}
+
+{{#deprecated}}-deprecated-{{/deprecated}}
+
+{{summary}}
+
+**GET {{@key}}**
+
+{{> operation}}
+{{/get}}
+
+{{#put}}
+## {{operationId}}
+
+{{#deprecated}}-deprecated-{{/deprecated}}
+
+{{summary}}
+
+**PUT {{@key}}**
+
+{{> operation}}
+{{/put}}
+
+{{#post}}
+## {{operationId}}
+
+{{#deprecated}}-deprecated-{{/deprecated}}
+
+{{summary}}
+
+**POST {{@key}}**
+
+{{> operation}}
+{{/post}}
+
+{{#delete}}
+## {{operationId}}
+
+{{#deprecated}}-deprecated-{{/deprecated}}
+
+{{summary}}
+
+**DELETE {{@key}}**
+
+{{> operation}}
+{{/delete}}
+
+{{#option}}
+## {{operationId}}
+
+{{#deprecated}}-deprecated-{{/deprecated}}
+
+{{summary}}
+
+**OPTION {{@key}}**
+
+{{> operation}}
+{{/option}}
+
+{{#patch}}
+## {{operationId}}
+
+{{#deprecated}}-deprecated-{{/deprecated}}
+
+{{summary}}
+
+**PATCH {{@key}}**
+
+{{> operation}}
+{{/patch}}
+
+{{#head}}
+## {{operationId}}
+
+{{#deprecated}}-deprecated-{{/deprecated}}
+
+{{summary}}
+
+**HEAD {{@key}}**
+
+{{> operation}}
+{{/head}}
+
+{{/each}}
+
+# Definitions
+{{#each definitions}}
+## {{key}}
+{{#description}}{{description}}{{/description}}
+<table border="1">
+<tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Default</th>
+    <th>Restrictions</th>
+    <th>Description</th>
+</tr>
+{{#each this.properties}}<tr>
+    <td>{{@key}}</td>
+    <td>{{#ifeq type "array"}}{{#items.$ref}}{{type}}[[{{basename items.$ref}}](#{{lower (basename items.$ref)}})]{{/items.$ref}}{{^items.$ref}}{{type}}[{{items.type}}]{{/items.$ref}}{{else}}{{#$ref}}[{{basename $ref}}](#{{lower (basename $ref)}}){{/$ref}}{{^$ref}}{{type}}{{/$ref}}{{/ifeq}}</td>
+    <td>{{#required}}required{{/required}}{{^required}}optional{{/required}}</td>
+    <td>{{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}</td>
+    <td>{{#format}}format:<i>{{format}}</i><br/>{{/format}}{{#maximum}}maximum:<i>{{maximum}}</i><br/>{{/maximum}}{{#if exclusiveMaximum}}exclusiveMaximum:<i>{{exclusiveMaximum}}</i><br/>{{/if}}{{#if minimum}}minimum:<i>{{minimum}}</i><br/>{{/if}}{{#if exclusiveMinimum}}exclusiveMinimum:<i>{{exclusiveMinimum}}</i><br/>{{/if}}{{#if maxLength}}maxLength:<i>{{maxLength}}</i><br/>{{/if}}{{#if minLength}}minLength:<i>{{minLength}}</i><br/>{{/if}}{{#if pattern}}pattern:<i>{{pattern}}</i><br/>{{/if}}{{#if maxItems}}maxItems:<i>{{maxItems}}</i><br/>{{/if}}{{#if minItems}}minItems:<i>{{minItems}}</i><br/>{{/if}}{{#if uniqueItems}}uniqueItems:<i>{{uniqueItems}}</i><br/>{{/if}}{{#if multipleOf}}multipleOf:<i>{{multipleOf}}</i><br/>{{/if}}{{#if enum}}<i>{{enum}}</i>{{/if}}</td>
+    <td>{{#description}}{{{description}}}{{/description}}</td>
+</tr>
+{{/each}}
+</table>
+{{/each}}
