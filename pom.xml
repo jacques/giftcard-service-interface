@@ -170,7 +170,7 @@
               <info>
                 <title>Giftcard Service Interface</title>
                 <version>${project.version}</version>
-                <description>The Electrum Giftcard Service describes an interface for giftcard
+                <description>The Electrum Giftcard Service Interface describes an interface for giftcard
                   transactions.
                 </description>
                 <contact>

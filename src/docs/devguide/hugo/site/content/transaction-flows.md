@@ -35,11 +35,15 @@ The sequence diagram below shows a successful [gift card activation](/specificat
 
 ![A Successful Activation](/images/sequence-successful-activation.png "A Successful Activation")
 
+Note that once an activation has been confirmed it cannot be reversed.
+
 ### Reversed Activation Flow
 
 The sequence diagram below shows a [gift card activation reversal](/specification/operations/#reverseactivation) operation which was subsequently reversed (e.g. the customer could not provide tender for the activation).
 
 ![A Reversed Activation](/images/sequence-reversed-activation.png "A Reversed Activation")
+
+Note that once an activation has been reversed it cannot be confirmed.
 
 ### Declined Activation Flow
 

@@ -13,7 +13,7 @@ Throughout the Giftcard Service Interface documentation various terms are used t
 
 ### Upstream And Downstream Entities
 
-Upstream and downstream impart a convention for the direction for a request and its response. A request message (such as an activation request) typically originates at a merchant location and must be sent to the gift card issuer for authorization. When a message is sent from a merchant to an issuer it is said to be sent upstream. Conversely, when a message is sent from an issuer to a merchant it is said to be sent downstream. Thus, 'upstream entity' is a relative term and is any entity located between the entity under discussion and the issuer (including the issuer itself). Likewise, 'downstream entity' is also a relative term and is any entity located between the entity under discussion and the merchant (including the merchant itself).
+Upstream and downstream impart a convention for the direction for a request and its response. A request message (such as an activation request) typically originates at a merchant location and must be sent to the gift card issuer for authorization. When a message is sent from a merchant to an issuer it is said to be sent upstream. When a message is sent from an issuer to a merchant it is said to be sent downstream. Thus, 'upstream entity' is a relative term and is any entity located between the entity under discussion and the issuer (including the issuer itself). Likewise, 'downstream entity' is also a relative term and is any entity located between the entity under discussion and the merchant (including the merchant itself).
 
 ### Server vs Client
 
@@ -23,7 +23,7 @@ The various request and response messages defined in the Giftcard Service Interf
 
 ## Security
 
-All communication shall be secured by establishing an SSL encrypted transport. SSL provides a manner for client and server systems to identify themselves to each other as well as to establish an encrypted channel over which they may securely communicate. SSL provides security at a network level and identifies entities who communicate to each other.
+All communication shall be secured by establishing an SSL encrypted transport. SSL provides a manner for client and server systems to identify themselves to each other as well as to establish an encrypted channel over which they may securely communicate. SSL provides security at a network level and identifies entities who communicate to each other. At a minimum server side SSL authentication shall be enforced although both server and client side authentication is performed (mutual authentication).
 
 Since the Giftcard Service Interface is a RESTful service, server implementations are typically hosted on web servers. Using the HTTP Basic Authentication headers over and above SSL allows the sender of a message to be identified at an application level and any appropriate processing to take place on a per-sender basis.
 
@@ -40,11 +40,11 @@ HTTP Status Codes               | Status type
 --------------------------------|---------------------------------------------------------------------------------------------
 200, 201, 202, 404*             | successful
 500, 504, timeout               | unknown
-400*, 404, 501, 503, all others | failed
+400, 404*, 501, 503, all others | failed
 
 A timeout occurs when the client has not received a response to a request after an agreed upon interval. Unless otherwise agreed, this interval shall be 60 seconds. Any response received after the timeout should be logged but ignored.
 
-Note that an HTTP status type of 404 could indicate either a success or a failure; this is dependent on the context of the response. This is covered in more detail in the section on [Transaction Flows](/transaction-flows/)
+\*Note that an HTTP status type of 404 could indicate either a success or a failure; this is dependent on the context of the response. This is covered in more detail in the section on [Transaction Flows](/transaction-flows/)
 
 ### ErrorDetail and detailMessage
 

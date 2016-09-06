@@ -5,6 +5,8 @@ menu:
     weight: 0
 ---
 
+The Giftcard Service Interface test pack is not currently available for use. This message will be removed when the test pack is available.
+
 When developing a server or client implementation of the Giftcard Service Interface it is important to verify that the implementation conforms to the Giftcard Service Interface specification. To test client implementations a test server is available at https://giftcard-service-test-pack.herokuapp.com. To test server implementations a test pack containing Postman scripts is available [here](https://github.com/electrumpayments/giftcard-service-test-pack/tree/master/test/postman).
 
 Note that the test pack is made available simply as a tool to help test and investigate common implementation issues. However, the test pack is not intended to imply certification of the tested implementation's conformance to the Giftcard Service Interface.
