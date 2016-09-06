@@ -19,7 +19,7 @@ import io.electrum.giftcard.api.model.ActivationConfirmation;
 import io.electrum.giftcard.api.model.ActivationRequest;
 import io.electrum.giftcard.api.model.ActivationResponse;
 import io.electrum.giftcard.api.model.ActivationReversal;
-import io.electrum.vas.model.ErrorDetail;
+import io.electrum.giftcard.api.model.ErrorDetail;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

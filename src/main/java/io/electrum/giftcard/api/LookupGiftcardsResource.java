@@ -13,8 +13,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
+import io.electrum.giftcard.api.model.ErrorDetail;
 import io.electrum.giftcard.api.model.LookupResponse;
-import io.electrum.vas.model.ErrorDetail;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
