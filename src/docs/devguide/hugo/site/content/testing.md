@@ -18,9 +18,9 @@ The test pack does not claim to implement any security features and should never
 Users of the test pack must bear in mind that any data sent from the test client or to the test server may be logged in plain text and without sufficient access control restrictions. Furthermore, the manner in which the test server handles requests does not guarantee records created by one entity cannot be viewed or modified by another. While the Postman scripts submit basic HTTP Authentication and the test server reads the Authentication header, these credentials are not mandatory in the test environment, are never verified and do not safely segregate test clients' messages from one another in all instances.
 
 ## Test Client
-The test client consists of a [Postman](https://www.getpostman.com) environment with pre-built requests which can be sent to the server implementation to be tested. The Postman requests build valid Giftcard Service Interface messages, send them to the server implementation being tested and validate that the responses are formatted as expected.
+The test client consists of two [Postman](https://www.getpostman.com) environments (localhost.postman_environment.json and heroku.postman_environment.json) with one collection of pre-built requests (Giftcard.postman_collection.json). The request collection can be used to direct messages to either a server listening on localhost using the localhost environment or messages can be directed to the test server available on Heroku by using the Heroku collection. The Postman requests build valid Giftcard Service Interface messages, send them to the server implementation being tested and validate that the responses are formatted as expected.
 
-In order to test server implementations the tester requires only the Postman files.
+In order to test server implementations the tester requires only the Postman files. To direct requests to a server other than on localhost or Heroku the tester can edit the localhost collection to point to the server to be tested and then use that Postman environment for testing.
 
 ### Operation
 
