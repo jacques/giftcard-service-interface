@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Information about the gift card activation.
- */
+ */ 
 @ApiModel(description = "Information about the gift card activation.")
 public class ActivationRequest extends Transaction {
 
