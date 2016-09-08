@@ -1,5 +1,7 @@
 package io.electrum.giftcard.api.model;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
@@ -51,8 +53,9 @@ public class ActivationResponse extends Transaction {
     * 
     * @return card
     **/
-   @ApiModelProperty(value = "Information about the gift card being activated.")
+   @ApiModelProperty(required = true, value = "Information about the gift card being activated.")
    @JsonProperty("card")
+   @NotNull
    public Card getCard() {
       return card;
    }
@@ -91,8 +94,9 @@ public class ActivationResponse extends Transaction {
     * 
     * @return product
     **/
-   @ApiModelProperty(value = "Information about the gift card product being activated.")
+   @ApiModelProperty(required = true, value = "Information about the gift card product being activated.")
    @JsonProperty("product")
+   @NotNull
    public Product getProduct() {
       return product;
    }
