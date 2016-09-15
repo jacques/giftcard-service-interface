@@ -65,7 +65,13 @@ awk 'BEGIN {
         print }' "${BASE_DIR}/target/swagger/swagger.yaml" "${BASE_DIR}/src/docs/devguide/hugo/swagger-template.md" > "${BASE_DIR}/target/devguide/hugo/content/specification/swagger.md"
 
 
-echo '5) Add hugo front matter'
+echo '5) Move release notes to specification section'
+echo ''
+
+mv "${BASE_DIR}/target/devguide/hugo/content/release-notes.md" "${BASE_DIR}/target/devguide/hugo/content/specification/release-notes.md"
+
+
+echo '6) Add hugo front matter'
 echo ''
 
 addFrontMatter () {
@@ -79,7 +85,8 @@ addFrontMatter () {
 
 #               Title        Weight Parent          File
 #-----------------------------------------------------------------------------------------------------------------------
-addFrontMatter "Introduction" "81" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/introduction.md"
-addFrontMatter "Operations"   "82" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/operations.md"
-addFrontMatter "Definitions"  "83" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/definitions.md"
-addFrontMatter "Swagger"      "84" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/swagger.md"
+addFrontMatter "Introduction"  "81" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/introduction.md"
+addFrontMatter "Operations"    "82" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/operations.md"
+addFrontMatter "Definitions"   "83" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/definitions.md"
+addFrontMatter "Swagger"       "84" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/swagger.md"
+addFrontMatter "ReleaseNotes"  "85" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/release-notes.md"

@@ -60,14 +60,15 @@ public abstract class LoadsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().confirmLoad(
-            loadId,
-            confirmationId,
-            loadConfirmation,
-            securityContext,
-            httpHeaders,
-            uriInfo,
-            httpServletRequest);
+      asyncResponse.resume(
+            getResourceImplementation().confirmLoad(
+                  loadId,
+                  confirmationId,
+                  loadConfirmation,
+                  securityContext,
+                  httpHeaders,
+                  uriInfo,
+                  httpServletRequest));
    }
 
    @POST
@@ -94,7 +95,9 @@ public abstract class LoadsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().load(loadId, loadRequest, securityContext, httpHeaders, uriInfo, httpServletRequest);
+      asyncResponse.resume(
+            getResourceImplementation()
+                  .load(loadId, loadRequest, securityContext, httpHeaders, uriInfo, httpServletRequest));
    }
 
    @POST
@@ -126,7 +129,14 @@ public abstract class LoadsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation()
-            .reverseLoad(loadId, reversalId, loadReversal, securityContext, httpHeaders, uriInfo, httpServletRequest);
+      asyncResponse.resume(
+            getResourceImplementation().reverseLoad(
+                  loadId,
+                  reversalId,
+                  loadReversal,
+                  securityContext,
+                  httpHeaders,
+                  uriInfo,
+                  httpServletRequest));
    }
 }

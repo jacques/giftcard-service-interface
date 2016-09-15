@@ -60,14 +60,15 @@ public abstract class RedemptionsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().confirmRedemption(
-            redemptionId,
-            confirmationId,
-            redemptionConfirmation,
-            securityContext,
-            httpHeaders,
-            uriInfo,
-            httpServletRequest);
+      asyncResponse.resume(
+            getResourceImplementation().confirmRedemption(
+                  redemptionId,
+                  confirmationId,
+                  redemptionConfirmation,
+                  securityContext,
+                  httpHeaders,
+                  uriInfo,
+                  httpServletRequest));
    }
 
    @POST
@@ -95,8 +96,9 @@ public abstract class RedemptionsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation()
-            .redeem(redemptionId, redemptionRequest, securityContext, httpHeaders, uriInfo, httpServletRequest);
+      asyncResponse.resume(
+            getResourceImplementation()
+                  .redeem(redemptionId, redemptionRequest, securityContext, httpHeaders, uriInfo, httpServletRequest));
    }
 
    @POST
@@ -127,13 +129,14 @@ public abstract class RedemptionsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      getResourceImplementation().reverseRedemption(
-            redemptionId,
-            reversalId,
-            redemtpionReversal,
-            securityContext,
-            httpHeaders,
-            uriInfo,
-            httpServletRequest);
+      asyncResponse.resume(
+            getResourceImplementation().reverseRedemption(
+                  redemptionId,
+                  reversalId,
+                  redemtpionReversal,
+                  securityContext,
+                  httpHeaders,
+                  uriInfo,
+                  httpServletRequest));
    }
 }

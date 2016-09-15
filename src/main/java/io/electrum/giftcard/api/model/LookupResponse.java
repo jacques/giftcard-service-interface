@@ -32,8 +32,9 @@ public class LookupResponse extends Transaction {
     * 
     * @return amounts
     **/
-   @ApiModelProperty(value = "Indicates the balance of the gift card at the time of the request.")
+   @ApiModelProperty(required = true, value = "Indicates the balance of the gift card at the time of the request.")
    @JsonProperty("amounts")
+   @NotNull
    public Amounts getAmounts() {
       return amounts;
    }
@@ -64,12 +65,13 @@ public class LookupResponse extends Transaction {
    }
 
    /**
-    * Information about the POS.
+    * Information about how card details were captured at the POS.
     * 
     * @return posInfo
     **/
-   @ApiModelProperty(value = "Information about the POS.")
+   @ApiModelProperty(required = true, value = "Information about how card details were captured at the POS.")
    @JsonProperty("posInfo")
+   @NotNull
    public PosInfo getPosInfo() {
       return posInfo;
    }
@@ -84,11 +86,11 @@ public class LookupResponse extends Transaction {
    }
 
    /**
-    * Information about the gift card product for which information is being requested.
+    * Information about the product associated with the gift card if the gift card has been activated.
     * 
     * @return product
     **/
-   @ApiModelProperty(value = "Information about the gift card product for which information is being requested.")
+   @ApiModelProperty(value = "Information about the product associated with the gift card if the gift card has been activated.")
    @JsonProperty("product")
    public Product getProduct() {
       return product;

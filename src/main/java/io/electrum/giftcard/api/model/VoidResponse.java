@@ -45,7 +45,7 @@ public class VoidResponse extends Transaction {
     * 
     * @return card
     **/
-   @ApiModelProperty(value = "Information about the gift card being voided.")
+   @ApiModelProperty(required = true, value = "Information about the gift card being voided.")
    @JsonProperty("card")
    public Card getCard() {
       return card;
