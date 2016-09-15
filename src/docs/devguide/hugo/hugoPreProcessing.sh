@@ -89,4 +89,4 @@ addFrontMatter "Introduction"  "81" "Specification" "${BASE_DIR}/target/devguide
 addFrontMatter "Operations"    "82" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/operations.md"
 addFrontMatter "Definitions"   "83" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/definitions.md"
 addFrontMatter "Swagger"       "84" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/swagger.md"
-addFrontMatter "ReleaseNotes"  "85" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/release-notes.md"
+addFrontMatter "Release Notes" "85" "Specification" "${BASE_DIR}/target/devguide/hugo/content/specification/release-notes.md"
