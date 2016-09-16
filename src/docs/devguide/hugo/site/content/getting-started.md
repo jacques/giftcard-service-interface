@@ -5,7 +5,6 @@ menu:
     weight: 0
 ---
 
-The Giftcard Service Interface is not yet released. This specification is still undergoing maintenance and should not be used for development until this message is removed. 
 
 The Giftcard Service Interface is an apache licensed RESTful HTTP based messaging protocol, intended to enable interoperability between gift card issuers and retailers.
 
