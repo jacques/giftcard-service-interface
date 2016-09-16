@@ -71,7 +71,7 @@ While the above sequence diagram describes a valid flow, an activation is permit
 
 ## Lookup Gift Card
 
-The sequence diagram below shows a [gift card lookup](/specification/operations/#lookupgiftcard) operation. The client submits an HTTP GET request with the card number of the gift card to be retrieved in the URL. The response from the server contains information about the gift card such as the balance of funds which may be redeemed against the gift card.
+The sequence diagram below shows a [gift card lookup](/specification/operations/#lookupgiftcard) operation. The client submits an HTTP POST request with a LookupRequest in the request body. The response from the server contains information about the gift card such as the balance of funds which may be redeemed against the gift card.
 
 ![A Gift Card Lookup](/images/sequence-giftcard-lookup.png "A Gift Card Lookup")
 
