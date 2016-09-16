@@ -25,7 +25,7 @@ deployment:
   release:
     branch: master
     commands:
-      # deploy docs to github-pages
-      - ~/circlecitools/bin/deployGithubPages.sh target/devguide/site giftcard-service-interface-docs
       # release to artifactory
       - ~/circlecitools/bin/releaseJavaSource.sh
+      # deploy docs to github-pages
+      - ~/circlecitools/bin/deployGithubPages.sh target/devguide/site giftcard-service-interface-docs
