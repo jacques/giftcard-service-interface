@@ -20,5 +20,5 @@ Alternatively, you can download the jar from [Bintray](https://bintray.com/elect
 
 ## Other languages
 
-The interface is also available as a swagger (OpenApi) definition, which can be used to generate starter projects in many languages. See more info [here](https://electrumpayments.github.io/giftcard-service-interface-docs/specification/swagger).
+The interface is also available as a swagger (OpenApi) definition, which can be used to generate starter projects in many languages. See more info [here](https://electrumpayments.github.io/giftcard-service-interface-docs/specification/swagger). 
 
