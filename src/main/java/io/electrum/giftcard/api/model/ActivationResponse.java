@@ -5,7 +5,6 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
-import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,13 +15,13 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Information about the result of processing the card activation.")
 public class ActivationResponse extends Transaction {
 
-   private Amounts amounts = null;
+   private GiftcardAmounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
    private SlipData slipData = null;
 
-   public ActivationResponse amounts(Amounts amounts) {
+   public ActivationResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
       return this;
    }
@@ -35,11 +34,11 @@ public class ActivationResponse extends Transaction {
     **/
    @ApiModelProperty(value = "Indicates the amount which was requested to be loaded onto the card during activation, the amount which was loaded and the balance of the gift card after activation.")
    @JsonProperty("amounts")
-   public Amounts getAmounts() {
+   public GiftcardAmounts getAmounts() {
       return amounts;
    }
 
-   public void setAmounts(Amounts amounts) {
+   public void setAmounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
    }
 

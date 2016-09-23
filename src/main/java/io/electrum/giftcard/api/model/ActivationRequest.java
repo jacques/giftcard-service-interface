@@ -16,12 +16,12 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Information about the gift card activation.")
 public class ActivationRequest extends Transaction {
 
-   private Amounts amounts = null;
+   private GiftcardAmounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
 
-   public ActivationRequest amounts(Amounts amounts) {
+   public ActivationRequest amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
       return this;
    }
@@ -33,11 +33,11 @@ public class ActivationRequest extends Transaction {
     **/
    @ApiModelProperty(value = "Specifies an amount which should be loaded onto the card as part of the activation.")
    @JsonProperty("amounts")
-   public Amounts getAmounts() {
+   public GiftcardAmounts getAmounts() {
       return amounts;
    }
 
-   public void setAmounts(Amounts amounts) {
+   public void setAmounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
    }
 
