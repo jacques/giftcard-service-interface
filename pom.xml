@@ -43,7 +43,7 @@
     <slf4j-version>1.7.5</slf4j-version>
     <logback-version>1.0.13</logback-version>
     <major-version>2</major-version>
-    <minor-version>0</minor-version>
+    <minor-version>1</minor-version>
     <patch-version>0</patch-version>
   </properties>
 

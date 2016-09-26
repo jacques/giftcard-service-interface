@@ -1,5 +1,11 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v2.1.0
+
+Released 23 September 2016
+
+- Added a second balance (available balance) to gift card requests and responses.
+
 ## v2.0.0
 
 Released 15 September 2016
