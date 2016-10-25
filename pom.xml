@@ -32,7 +32,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <service-interface-base-version>2.0.9</service-interface-base-version>
+    <service-interface-base-version>3.0.0</service-interface-base-version>
     <joda-time-version>2.9.4</joda-time-version>
     <swagger-version>1.5.9</swagger-version>
     <jetty-version>9.2.14.v20151106</jetty-version>

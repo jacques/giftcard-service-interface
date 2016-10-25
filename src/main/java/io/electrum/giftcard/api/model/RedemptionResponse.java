@@ -1,7 +1,6 @@
 package io.electrum.giftcard.api.model;
 
 import io.electrum.vas.Utils;
-import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.SlipData;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
