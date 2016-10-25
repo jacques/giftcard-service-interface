@@ -1,12 +1,13 @@
 package io.electrum.giftcard.api.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Amounts;
+import io.electrum.vas.model.SlipData;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Information about the outcome of voiding process.
@@ -93,26 +94,6 @@ public class VoidResponse extends Transaction {
 
    public void setProduct(Product product) {
       this.product = product;
-   }
-
-   public VoidResponse slipData(SlipData slipData) {
-      this.slipData = slipData;
-      return this;
-   }
-
-   /**
-    * Text to be printed on the customer receipt.
-    * 
-    * @return slipData
-    **/
-   @ApiModelProperty(value = "Text to be printed on the customer receipt.")
-   @JsonProperty("slipData")
-   public SlipData getSlipData() {
-      return slipData;
-   }
-
-   public void setSlipData(SlipData slipData) {
-      this.slipData = slipData;
    }
 
    @Override
