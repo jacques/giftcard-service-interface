@@ -11,8 +11,6 @@ import io.swagger.annotations.ApiResponses;
 import io.swagger.annotations.Authorization;
 import io.swagger.annotations.ResponseHeader;
 
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -49,7 +47,7 @@ public abstract class LookupGiftcardsResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void lookupGiftcard(
-         @ApiParam(value = "The randomly generated UUID identifying this lookup request, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).", required = true) @PathParam("lookupId") UUID lookupId,
+         @ApiParam(value = "The randomly generated UUID identifying this lookup request, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).", required = true) @PathParam("lookupId") String lookupId,
          @ApiParam(value = "Information describing the gift card lookup to be performed.", required = true) LookupRequest lookupRequest,
          @Context SecurityContext securityContext,
          @Suspended AsyncResponse asyncResponse,
