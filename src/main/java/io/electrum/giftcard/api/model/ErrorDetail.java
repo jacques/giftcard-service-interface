@@ -151,7 +151,7 @@ public class ErrorDetail {
       return requestType;
    }
 
-   public void setRequesType(RequestType requesType) {
+   public void setRequestType(RequestType requesType) {
       this.requestType = requesType;
    }
 
