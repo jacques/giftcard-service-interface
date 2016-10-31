@@ -76,6 +76,7 @@ public class ErrorDetail {
       }
 
       @Override
+      @JsonValue
       public String toString() {
          return String.valueOf(value);
       }
@@ -216,12 +217,13 @@ public class ErrorDetail {
       }
       ErrorDetail errorDetail = (ErrorDetail) o;
       return Objects.equals(errorType, errorDetail.errorType) && Objects.equals(errorMessage, errorDetail.errorMessage)
-            && Objects.equals(detailMessage, errorDetail.detailMessage);
+            && Objects.equals(detailMessage, errorDetail.detailMessage)
+            && Objects.equals(requestType, errorDetail.requestType);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(errorType, errorMessage, detailMessage);
+      return Objects.hash(requestType, errorType, errorMessage, detailMessage);
    }
 
    @Override
