@@ -5,7 +5,7 @@ import io.electrum.giftcard.api.model.ActivationRequest;
 import io.electrum.giftcard.api.model.ActivationResponse;
 import io.electrum.giftcard.api.model.ActivationReversal;
 import io.electrum.giftcard.api.model.ErrorDetail;
-import io.electrum.vas.model.BasicAdvice;
+import io.electrum.vas.model.BasicAdviceResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -45,7 +45,7 @@ public abstract class ActivationsResource {
          + "been received. Multiple confirmation advices may be sent which refer to the same activation. "
          + "The net result is that the activation is confirmed once.", authorizations = { @Authorization(value = "httpBasic") }, tags = {
          "Activations", "Confirmations", })
-   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdvice.class),
+   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
@@ -115,7 +115,7 @@ public abstract class ActivationsResource {
          + "advices may be sent which refer to the same activation. The net result is that the "
          + "activation is reversed once.", authorizations = { @Authorization(value = "httpBasic") }, tags = {
          "Activations", "Reversals", })
-   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdvice.class),
+   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),

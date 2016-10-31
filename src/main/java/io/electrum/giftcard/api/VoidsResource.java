@@ -5,7 +5,7 @@ import io.electrum.giftcard.api.model.VoidConfirmation;
 import io.electrum.giftcard.api.model.VoidRequest;
 import io.electrum.giftcard.api.model.VoidResponse;
 import io.electrum.giftcard.api.model.VoidReversal;
-import io.electrum.vas.model.BasicAdvice;
+import io.electrum.vas.model.BasicAdviceResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -44,7 +44,7 @@ public abstract class VoidsResource {
          + "has been received. Multiple confirmation advices may be sent which refer to the same "
          + "void. The net result is that the void is confirmed once.", authorizations = { @Authorization(value = "httpBasic") }, tags = {
          "Confirmations", "Voids", })
-   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdvice.class),
+   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
@@ -113,7 +113,7 @@ public abstract class VoidsResource {
          + "Multiple reversals may be sent which refer to the same void. The "
          + "net result is that the void is reversed once.", authorizations = { @Authorization(value = "httpBasic") }, tags = {
          "Voids", "Reversals", })
-   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdvice.class),
+   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),

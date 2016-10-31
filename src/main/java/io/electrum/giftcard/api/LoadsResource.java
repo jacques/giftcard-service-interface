@@ -5,7 +5,7 @@ import io.electrum.giftcard.api.model.LoadConfirmation;
 import io.electrum.giftcard.api.model.LoadRequest;
 import io.electrum.giftcard.api.model.LoadResponse;
 import io.electrum.giftcard.api.model.LoadReversal;
-import io.electrum.vas.model.BasicAdvice;
+import io.electrum.vas.model.BasicAdviceResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -44,7 +44,7 @@ public abstract class LoadsResource {
          + "Multiple confirmation advices may be sent which refer to the same load. The net result is that "
          + "the load is confirmed once.", authorizations = { @Authorization(value = "httpBasic") }, tags = {
          "Confirmations", "Loads", })
-   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdvice.class),
+   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
@@ -112,7 +112,7 @@ public abstract class LoadsResource {
          + "reversals may be sent which refer to the same load. The net result "
          + "is that the load is reversed once. Note that a load reversal does not " + "equate to a redemption.", authorizations = { @Authorization(value = "httpBasic") }, tags = {
          "Loads", "Reversals", })
-   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdvice.class),
+   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
