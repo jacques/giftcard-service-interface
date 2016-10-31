@@ -44,7 +44,7 @@
     <logback-version>1.0.13</logback-version>
     <major-version>3</major-version>
     <minor-version>0</minor-version>
-    <patch-version>0</patch-version>
+    <patch-version>1</patch-version>
   </properties>
 
   <dependencies>

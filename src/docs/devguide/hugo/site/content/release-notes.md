@@ -1,5 +1,11 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.0.1
+
+Released 31 October 2016
+
+- Updated Giftcard Service Interface to make use of base interface v3.1.0 to include new TenderTypes
+
 ## v3.0.0
 
 Released 26 October 2016
