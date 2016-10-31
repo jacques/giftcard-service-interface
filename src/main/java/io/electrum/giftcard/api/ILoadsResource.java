@@ -1,6 +1,8 @@
 package io.electrum.giftcard.api;
 
-import java.util.UUID;
+import io.electrum.giftcard.api.model.LoadConfirmation;
+import io.electrum.giftcard.api.model.LoadRequest;
+import io.electrum.giftcard.api.model.LoadReversal;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.HttpHeaders;
@@ -8,14 +10,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
-import io.electrum.giftcard.api.model.LoadConfirmation;
-import io.electrum.giftcard.api.model.LoadRequest;
-import io.electrum.giftcard.api.model.LoadReversal;
-
 public interface ILoadsResource {
    public Response confirmLoad(
-         UUID loadId,
-         UUID confirmationId,
+         String loadId,
+         String confirmationId,
          LoadConfirmation body,
          SecurityContext securityContext,
          HttpHeaders httpHeaders,
@@ -23,7 +21,7 @@ public interface ILoadsResource {
          HttpServletRequest httpServletRequest);
 
    public Response load(
-         UUID loadId,
+         String loadId,
          LoadRequest body,
          SecurityContext securityContext,
          HttpHeaders httpHeaders,
@@ -31,8 +29,8 @@ public interface ILoadsResource {
          HttpServletRequest httpServletRequest);
 
    public Response reverseLoad(
-         UUID loadId,
-         UUID reversalId,
+         String loadId,
+         String reversalId,
          LoadReversal body,
          SecurityContext securityContext,
          HttpHeaders httpHeaders,

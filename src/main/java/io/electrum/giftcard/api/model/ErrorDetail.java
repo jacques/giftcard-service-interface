@@ -1,15 +1,17 @@
 package io.electrum.giftcard.api.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.Length;
+
+import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Represents the outcome of a completed transaction
@@ -52,9 +54,40 @@ public class ErrorDetail {
       }
    }
 
+   public enum RequestType {
+      ACTIVATION_CONFIRMATION("ACTIVATION_CONFIRMATION"),
+      ACTIVATION_REQUEST("ACTIVATION_REQUEST"),
+      ACTIVATION_REVERSAL("ACTIVATION_REVERSAL"),
+      LOAD_CONFIRMATION("LOAD_CONFIRMATION"),
+      LOAD_REQUEST("LOAD_REQUEST"),
+      LOAD_REVERSAL("LOAD_REVERSAL"),
+      LOOKUP_REQUEST("LOOKUP_REQUEST"),
+      REDEMPTION_CONFIRMATION("REDEMPTION_CONFIRMATION"),
+      REDEMPTION_REQUEST("REDEMPTION_REQUEST"),
+      REDEMPTION_REVERSAL("REDEMPTION_REVERSAL"),
+      VOID_CONFIRMATION("VOID_CONFIRMATION"),
+      VOID_REQUEST("VOID_REQUEST"),
+      VOID_REVERSAL("VOID_REVERSAL");
+
+      private String value;
+
+      RequestType(String value) {
+         this.value = value;
+      }
+
+      @Override
+      @JsonValue
+      public String toString() {
+         return String.valueOf(value);
+      }
+   }
+
    private ErrorType errorType = null;
    private String errorMessage = null;
    private Object detailMessage = null;
+   private RequestType requestType = null;
+   private String id = null;
+   private String originalId = null;
 
    /**
     * The type of error that occurred
@@ -73,6 +106,67 @@ public class ErrorDetail {
 
    public void setErrorType(ErrorType errorType) {
       this.errorType = errorType;
+   }
+
+   public ErrorDetail requestType(RequestType requestType) {
+      this.requestType = requestType;
+      return this;
+   }
+
+   @ApiModelProperty(required = true, value = "The type of request being processed when the error occurred.")
+   @JsonProperty("requestType")
+   @NotNull
+   public RequestType getRequestType() {
+      return requestType;
+   }
+
+   public void setRequestType(RequestType requesType) {
+      this.requestType = requesType;
+   }
+
+   /**
+    * The UUID of the message for which the error occurred.
+    * 
+    * @param id
+    *           The UUID
+    * @return this object
+    */
+   public ErrorDetail id(String id) {
+      this.id = id;
+      return this;
+   }
+
+   @ApiModelProperty(required = true, value = "The UUID of the message for which the error occurred.")
+   @JsonProperty("id")
+   @NotNull
+   public String getId() {
+      return id;
+   }
+
+   public void setId(String id) {
+      this.id = id;
+   }
+
+   /**
+    * The UUID of the original request message int he case of an error occurring for an advice message
+    * 
+    * @param originalId
+    *           The original request UUID
+    * @return this object
+    */
+   public ErrorDetail originalId(String originalId) {
+      this.originalId = originalId;
+      return this;
+   }
+
+   @ApiModelProperty(value = "The UUID of the original request message int he case of an error occurring for an advice message.")
+   @JsonProperty("originalId")
+   public String getOriginalId() {
+      return originalId;
+   }
+
+   public void setOriginalId(String originalId) {
+      this.originalId = originalId;
    }
 
    /**
@@ -123,12 +217,13 @@ public class ErrorDetail {
       }
       ErrorDetail errorDetail = (ErrorDetail) o;
       return Objects.equals(errorType, errorDetail.errorType) && Objects.equals(errorMessage, errorDetail.errorMessage)
-            && Objects.equals(detailMessage, errorDetail.detailMessage);
+            && Objects.equals(detailMessage, errorDetail.detailMessage)
+            && Objects.equals(requestType, errorDetail.requestType);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(errorType, errorMessage, detailMessage);
+      return Objects.hash(requestType, errorType, errorMessage, detailMessage);
    }
 
    @Override
@@ -138,6 +233,9 @@ public class ErrorDetail {
 
       sb.append("    errorType: ").append(Utils.toIndentedString(errorType)).append("\n");
       sb.append("    responseMessage: ").append(Utils.toIndentedString(errorMessage)).append("\n");
+      sb.append("    requestType: ").append(Utils.toIndentedString(requestType)).append("\n");
+      sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
+      sb.append("    originalId: ").append(Utils.toIndentedString(originalId)).append("\n");
       sb.append("    detailMessage: ").append(Utils.toIndentedString(detailMessage)).append("\n");
       sb.append("}");
       return sb.toString();
