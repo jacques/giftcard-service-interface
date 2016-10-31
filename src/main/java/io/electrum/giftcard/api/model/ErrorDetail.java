@@ -96,9 +96,31 @@ public class ErrorDetail {
       return this;
    }
 
+   @ApiModelProperty(required = true, value = "The type of error that occurred")
+   @JsonProperty("errorType")
+   @NotNull
+   public ErrorType getErrorType() {
+      return errorType;
+   }
+
+   public void setErrorType(ErrorType errorType) {
+      this.errorType = errorType;
+   }
+
    public ErrorDetail requestType(RequestType requestType) {
       this.requestType = requestType;
       return this;
+   }
+
+   @ApiModelProperty(required = true, value = "The type of request being processed when the error occurred.")
+   @JsonProperty("requestType")
+   @NotNull
+   public RequestType getRequestType() {
+      return requestType;
+   }
+
+   public void setRequestType(RequestType requesType) {
+      this.requestType = requesType;
    }
 
    /**
@@ -113,6 +135,17 @@ public class ErrorDetail {
       return this;
    }
 
+   @ApiModelProperty(required = true, value = "The UUID of the message for which the error occurred.")
+   @JsonProperty("id")
+   @NotNull
+   public String getId() {
+      return id;
+   }
+
+   public void setId(String id) {
+      this.id = id;
+   }
+
    /**
     * The UUID of the original request message int he case of an error occurring for an advice message
     * 
@@ -125,46 +158,14 @@ public class ErrorDetail {
       return this;
    }
 
-   public void setOriginalId(String originalId) {
-      this.originalId = originalId;
-   }
-
-   @ApiModelProperty(required = false, value = "The UUID of the original request message int he case of an error occurring for an advice message.")
+   @ApiModelProperty(value = "The UUID of the original request message int he case of an error occurring for an advice message.")
    @JsonProperty("originalId")
    public String getOriginalId() {
       return originalId;
    }
 
-   public void setId(String id) {
-      this.id = id;
-   }
-
-   @ApiModelProperty(required = true, value = "The UUID of the message for which the error occurred.")
-   @JsonProperty("id")
-   public String getId() {
-      return id;
-   }
-
-   @ApiModelProperty(required = true, value = "The type of request being processed when the error occurred.")
-   @JsonProperty("requestType")
-   @NotNull
-   public RequestType getRequestType() {
-      return requestType;
-   }
-
-   public void setRequestType(RequestType requesType) {
-      this.requestType = requesType;
-   }
-
-   @ApiModelProperty(required = true, value = "The type of error that occurred")
-   @JsonProperty("errorType")
-   @NotNull
-   public ErrorType getErrorType() {
-      return errorType;
-   }
-
-   public void setErrorType(ErrorType errorType) {
-      this.errorType = errorType;
+   public void setOriginalId(String originalId) {
+      this.originalId = originalId;
    }
 
    /**
