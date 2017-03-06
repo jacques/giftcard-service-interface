@@ -62,17 +62,16 @@ public abstract class ActivationsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(
-            getResourceImplementation().confirmActivation(
-                  activationId,
-                  confirmationId,
-                  activationConfirmation,
-                  securityContext,
-                  request,
-                  httpHeaders,
-                  asyncResponse,
-                  uriInfo,
-                  httpServletRequest));
+      getResourceImplementation().confirmActivation(
+            activationId,
+            confirmationId,
+            activationConfirmation,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
    }
 
    @POST
@@ -101,16 +100,15 @@ public abstract class ActivationsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(
-            getResourceImplementation().activate(
-                  activationId,
-                  activationRequest,
-                  securityContext,
-                  request,
-                  httpHeaders,
-                  asyncResponse,
-                  uriInfo,
-                  httpServletRequest));
+      getResourceImplementation().activate(
+            activationId,
+            activationRequest,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
    }
 
    @POST
@@ -142,16 +140,15 @@ public abstract class ActivationsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(
-            getResourceImplementation().reverseActivation(
-                  activationId,
-                  reversalId,
-                  activationReversal,
-                  securityContext,
-                  request,
-                  httpHeaders,
-                  asyncResponse,
-                  uriInfo,
-                  httpServletRequest));
+      getResourceImplementation().reverseActivation(
+            activationId,
+            reversalId,
+            activationReversal,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
    }
 }

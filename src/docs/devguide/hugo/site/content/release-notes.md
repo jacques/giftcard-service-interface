@@ -1,5 +1,11 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.0.3
+
+Released 06 March 2017
+
+- Remove incorrect calls to AsyncResponse.resume in resources classes.
+
 ## v3.0.2
 
 Released 06 March 2017

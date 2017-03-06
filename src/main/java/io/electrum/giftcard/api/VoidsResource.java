@@ -61,17 +61,16 @@ public abstract class VoidsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(
-            getResourceImplementation().confirmVoid(
-                  voidId,
-                  confirmationId,
-                  voidConfirmation,
-                  securityContext,
-                  request,
-                  httpHeaders,
-                  asyncResponse,
-                  uriInfo,
-                  httpServletRequest));
+      getResourceImplementation().confirmVoid(
+            voidId,
+            confirmationId,
+            voidConfirmation,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
    }
 
    @POST
@@ -100,16 +99,15 @@ public abstract class VoidsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(
-            getResourceImplementation().voidGiftcard(
-                  voidId,
-                  voidRequest,
-                  securityContext,
-                  request,
-                  httpHeaders,
-                  asyncResponse,
-                  uriInfo,
-                  httpServletRequest));
+      getResourceImplementation().voidGiftcard(
+            voidId,
+            voidRequest,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
    }
 
    @POST
@@ -141,16 +139,15 @@ public abstract class VoidsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(
-            getResourceImplementation().reverseVoid(
-                  voidId,
-                  reversalId,
-                  voidReversal,
-                  securityContext,
-                  request,
-                  httpHeaders,
-                  asyncResponse,
-                  uriInfo,
-                  httpServletRequest));
+      getResourceImplementation().reverseVoid(
+            voidId,
+            reversalId,
+            voidReversal,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
    }
 }

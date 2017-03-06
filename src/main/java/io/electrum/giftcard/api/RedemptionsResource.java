@@ -61,17 +61,16 @@ public abstract class RedemptionsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(
-            getResourceImplementation().confirmRedemption(
-                  redemptionId,
-                  confirmationId,
-                  redemptionConfirmation,
-                  securityContext,
-                  request,
-                  httpHeaders,
-                  asyncResponse,
-                  uriInfo,
-                  httpServletRequest));
+      getResourceImplementation().confirmRedemption(
+            redemptionId,
+            confirmationId,
+            redemptionConfirmation,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
    }
 
    @POST
@@ -100,16 +99,15 @@ public abstract class RedemptionsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(
-            getResourceImplementation().redeem(
-                  redemptionId,
-                  redemptionRequest,
-                  securityContext,
-                  request,
-                  httpHeaders,
-                  asyncResponse,
-                  uriInfo,
-                  httpServletRequest));
+      getResourceImplementation().redeem(
+            redemptionId,
+            redemptionRequest,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
    }
 
    @POST
@@ -141,16 +139,15 @@ public abstract class RedemptionsResource {
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(
-            getResourceImplementation().reverseRedemption(
-                  redemptionId,
-                  reversalId,
-                  redemtpionReversal,
-                  securityContext,
-                  request,
-                  httpHeaders,
-                  asyncResponse,
-                  uriInfo,
-                  httpServletRequest));
+      getResourceImplementation().reverseRedemption(
+            redemptionId,
+            reversalId,
+            redemtpionReversal,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
    }
 }
