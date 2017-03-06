@@ -24,6 +24,7 @@ import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
@@ -42,8 +43,8 @@ public abstract class LoadsResource {
          + "registers the confirmation of a prior load on a gift card. Load confirmations are advice type "
          + "messages and should continue to be sent at suitable intervals until a response has been received. "
          + "Multiple confirmation advices may be sent which refer to the same load. The net result is that "
-         + "the load is confirmed once.", authorizations = { @Authorization(value = "httpBasic") }, tags = {
-         "Confirmations", "Loads", })
+         + "the load is confirmed once.", authorizations = {
+               @Authorization(value = "httpBasic") }, tags = { "Confirmations", "Loads", })
    @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
@@ -55,18 +56,22 @@ public abstract class LoadsResource {
          @ApiParam(value = "The randomly generated UUID identifying this confirmation, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).", required = true) @PathParam("confirmationId") String confirmationId,
          @ApiParam(value = "The load confirmation information.", required = true) LoadConfirmation loadConfirmation,
          @Context SecurityContext securityContext,
+         @Context Request request,
          @Suspended AsyncResponse asyncResponse,
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(getResourceImplementation().confirmLoad(
-            loadId,
-            confirmationId,
-            loadConfirmation,
-            securityContext,
-            httpHeaders,
-            uriInfo,
-            httpServletRequest));
+      asyncResponse.resume(
+            getResourceImplementation().confirmLoad(
+                  loadId,
+                  confirmationId,
+                  loadConfirmation,
+                  securityContext,
+                  request,
+                  httpHeaders,
+                  asyncResponse,
+                  uriInfo,
+                  httpServletRequest));
    }
 
    @POST
@@ -76,9 +81,11 @@ public abstract class LoadsResource {
    @ApiOperation(value = "Request funds to be loaded on a gift card.", notes = "The Loads endpoint "
          + "allows loading of funds on a gift card to be authorized. A load is not considered "
          + "complete until a load confirmation or load reversal has been sent and acknowledged. A "
-         + "load request should only be sent once otherwise multiple loads may occur erroneously.", authorizations = { @Authorization(value = "httpBasic") }, tags = { "Loads", })
+         + "load request should only be sent once otherwise multiple loads may occur erroneously.", authorizations = {
+               @Authorization(value = "httpBasic") }, tags = { "Loads", })
    @ApiResponses(value = {
-         @ApiResponse(code = 201, message = "Created", response = LoadResponse.class, responseHeaders = { @ResponseHeader(name = "Location", description = "The location of the created load resource", response = String.class) }),
+         @ApiResponse(code = 201, message = "Created", response = LoadResponse.class, responseHeaders = {
+               @ResponseHeader(name = "Location", description = "The location of the created load resource", response = String.class) }),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
@@ -87,6 +94,7 @@ public abstract class LoadsResource {
          @ApiParam(value = "The randomly generated UUID identifying this load, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).", required = true) @PathParam("loadId") String loadId,
          @ApiParam(value = "The load information.", required = true) LoadRequest loadRequest,
          @Context SecurityContext securityContext,
+         @Context Request request,
          @Suspended AsyncResponse asyncResponse,
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
@@ -95,7 +103,9 @@ public abstract class LoadsResource {
             loadId,
             loadRequest,
             securityContext,
+            request,
             httpHeaders,
+            asyncResponse,
             uriInfo,
             httpServletRequest));
    }
@@ -104,14 +114,16 @@ public abstract class LoadsResource {
    @Path("/{loadId}/reversals/{reversalId}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(value = "Simplistically, a load reversal undoes a load if the load " + "was successfully processed.", notes = "The Load Reversals endpoint allows "
-         + "loads on a gift card to be reversed. If the sender of a load request "
-         + "is uncertain of the state of a load request then the sender must "
-         + "send a load reversal. Reversals should continue to be sent at "
-         + "suitable intervals until a response has been received. Multiple "
-         + "reversals may be sent which refer to the same load. The net result "
-         + "is that the load is reversed once. Note that a load reversal does not " + "equate to a redemption.", authorizations = { @Authorization(value = "httpBasic") }, tags = {
-         "Loads", "Reversals", })
+   @ApiOperation(value = "Simplistically, a load reversal undoes a load if the load "
+         + "was successfully processed.", notes = "The Load Reversals endpoint allows "
+               + "loads on a gift card to be reversed. If the sender of a load request "
+               + "is uncertain of the state of a load request then the sender must "
+               + "send a load reversal. Reversals should continue to be sent at "
+               + "suitable intervals until a response has been received. Multiple "
+               + "reversals may be sent which refer to the same load. The net result "
+               + "is that the load is reversed once. Note that a load reversal does not "
+               + "equate to a redemption.", authorizations = {
+                     @Authorization(value = "httpBasic") }, tags = { "Loads", "Reversals", })
    @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
@@ -123,17 +135,21 @@ public abstract class LoadsResource {
          @ApiParam(value = "The randomly generated UUID identifying this reversal, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).", required = true) @PathParam("reversalId") String reversalId,
          @ApiParam(value = "The redemption reversal information.", required = true) LoadReversal loadReversal,
          @Context SecurityContext securityContext,
+         @Context Request request,
          @Suspended AsyncResponse asyncResponse,
          @Context HttpHeaders httpHeaders,
          @Context UriInfo uriInfo,
          @Context HttpServletRequest httpServletRequest) {
-      asyncResponse.resume(getResourceImplementation().reverseLoad(
-            loadId,
-            reversalId,
-            loadReversal,
-            securityContext,
-            httpHeaders,
-            uriInfo,
-            httpServletRequest));
+      asyncResponse.resume(
+            getResourceImplementation().reverseLoad(
+                  loadId,
+                  reversalId,
+                  loadReversal,
+                  securityContext,
+                  request,
+                  httpHeaders,
+                  asyncResponse,
+                  uriInfo,
+                  httpServletRequest));
    }
 }
