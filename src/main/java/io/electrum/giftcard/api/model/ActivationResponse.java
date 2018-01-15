@@ -19,7 +19,6 @@ public class ActivationResponse extends Transaction {
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
-   private SlipData slipData = null;
 
    public ActivationResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
