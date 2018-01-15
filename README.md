@@ -12,7 +12,7 @@ To include the service interface into your maven project, include the below depe
 <dependency>
     <groupId>io.electrum</groupId>
     <artifactId>giftcard-service-interface</artifactId>
-    <version>2.1.0</version>
+    <version>3.1.0-RC1</version>
 </dependency>
 ```
 

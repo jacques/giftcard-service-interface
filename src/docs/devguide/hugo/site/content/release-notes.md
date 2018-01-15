@@ -1,5 +1,12 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.1.0
+
+Released 15 January 2018
+
+- Align with v3.4.0 of base interface spec
+- Don’t re-declare slipData in ActivationResponse
+
 ## v3.0.3
 
 Released 06 March 2017
