@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.electrum</groupId>
   <artifactId>giftcard-service-interface</artifactId>
-  <version>${major-version}.${minor-version}.${patch-version}</version>
+  <version>${major-version}.${minor-version}.${patch-version}-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Giftcard Service Interface</name>
   <description>Giftcard Service Interface</description>
@@ -32,7 +32,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <service-interface-base-version>3.4.0</service-interface-base-version>
+    <service-interface-base-version>3.5.0</service-interface-base-version>
     <joda-time-version>2.9.4</joda-time-version>
     <swagger-version>1.5.9</swagger-version>
     <jetty-version>9.2.14.v20151106</jetty-version>
@@ -43,7 +43,7 @@
     <slf4j-version>1.7.5</slf4j-version>
     <logback-version>1.0.13</logback-version>
     <major-version>3</major-version>
-    <minor-version>1</minor-version>
+    <minor-version>2</minor-version>
     <patch-version>0</patch-version>
   </properties>
 
