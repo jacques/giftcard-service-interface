@@ -14,7 +14,6 @@ public class RedemptionReversal extends BasicReversal {
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class RedemptionReversal {\n");
-
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
