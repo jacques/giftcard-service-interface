@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.electrum</groupId>
   <artifactId>giftcard-service-interface</artifactId>
-  <version>${major-version}.${minor-version}.${patch-version}-SNAPSHOT</version>
+  <version>${major-version}.${minor-version}.${patch-version}</version>
   <packaging>jar</packaging>
   <name>Giftcard Service Interface</name>
   <description>Giftcard Service Interface</description>
