@@ -127,7 +127,6 @@ public class RedemptionRequest extends Transaction {
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class RedemptionRequest {\n");
-
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
       sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
@@ -140,6 +139,9 @@ public class RedemptionRequest extends Transaction {
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    product: ").append(Utils.toIndentedString(product)).append("\n");
       sb.append("    basket: ").append(Utils.toIndentedString(basket)).append("\n");
+      sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
+      sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
+      sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
       sb.append("}");
       return sb.toString();
    }

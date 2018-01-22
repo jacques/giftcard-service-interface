@@ -1,5 +1,12 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.2.0
+
+Released 22 January 2018
+
+- Updated Giftcard Service Interface to make use of base interface v3.1.0 to include new TranTypes and AccountTypes for transactions.
+
+
 ## v3.1.0
 
 Released 15 January 2018
