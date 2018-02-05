@@ -35,7 +35,6 @@ public class BlockRequest extends Transaction {
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
-
    private BlockReason blockReason = null;
 
    public BlockRequest card(Card card) {
@@ -107,7 +106,7 @@ public class BlockRequest extends Transaction {
    /**
     * The reason stated for blocking the card.
     *
-    * @return product
+    * @return blockReason
     **/
    @ApiModelProperty(value = "The reason stated for blocking the card.")
    @JsonProperty("blockReason")
