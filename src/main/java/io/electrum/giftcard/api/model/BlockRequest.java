@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotNull;
 
 /**
- * Information about the redemption being made on the gift card.
+ * Information about the block request being made on the gift card.
  */
 @ApiModel(description = "Information about the block request being made against the gift card.")
 public class BlockRequest extends Transaction {
