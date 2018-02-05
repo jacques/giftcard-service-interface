@@ -23,7 +23,7 @@ public abstract class TransfersResource {
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Request a transfer from a source gift card to a target gift card.", notes = "The Transfers endpoint "
-         + "allows funds to be transferred from one gift cards to another. A transfer is not considered "
+         + "allows funds to be transferred from one gift card to another. A transfer is not considered "
          + "complete until a transfer confirmation or transfer reversal has been sent and "
          + "acknowledged. A transfer request should only be sent once otherwise multiple "
          + "transfers may occur erroneously.", authorizations = {
@@ -61,7 +61,7 @@ public abstract class TransfersResource {
    @Produces({ "application/json" })
    @ApiOperation(value = "Simplistically, a transfer reversal undoes a transfer if the transfer "
          + "was successfully processed.", notes = "The Transfer Reversals endpoint allows "
-         + "transfer between gift cards to be reversed. If the sender of a transfer request "
+         + "a transfer between gift cards to be reversed. If the sender of a transfer request "
          + "is uncertain of the state of a transfer request then the sender must send a "
          + "transfer reversal. Reversals should continue to be sent at suitable intervals "
          + "until a response has been received. Multiple reversals may be sent which refer to "
