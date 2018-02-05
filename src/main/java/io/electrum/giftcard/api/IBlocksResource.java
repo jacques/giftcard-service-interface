@@ -1,15 +1,23 @@
 package io.electrum.giftcard.api;
 
-import io.electrum.giftcard.api.model.BlockRequest;
-import io.electrum.giftcard.api.model.BlockReversal;
-import io.electrum.giftcard.api.model.RedemptionRequest;
-import io.electrum.giftcard.api.model.RedemptionReversal;
+import io.electrum.giftcard.api.model.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.core.*;
 
 public interface IBlocksResource {
+
+   public Response confirmBlock(
+         String blockId,
+         String confirmationId,
+         BlockConfirmation body,
+         SecurityContext securityContext,
+         Request request,
+         HttpHeaders httpHeaders,
+         AsyncResponse asyncResponse,
+         UriInfo uriInfo,
+         HttpServletRequest httpServletRequest);
 
    public Response block(
          String blockId,

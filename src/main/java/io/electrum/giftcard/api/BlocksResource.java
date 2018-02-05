@@ -19,6 +19,44 @@ public abstract class BlocksResource {
    protected abstract IBlocksResource getResourceImplementation();
 
    @POST
+   @Path("/{blockId}/confirmations/{confirmationId}")
+   @Consumes({ "application/json" })
+   @Produces({ "application/json" })
+   @ApiOperation(value = "Confirm a block against a gift card.", notes = "The Block Confirmations endpoint "
+         + "registers the confirmation of a prior block on a gift card. Block confirmations are advice type "
+         + "messages and should continue to be sent at suitable intervals until a response has been received. Multiple "
+         + "confirmation advices may be sent which refer to the same block request. The net result is that the "
+         + "block is confirmed once.", authorizations = {
+         @Authorization(value = "httpBasic") }, tags = { "Confirmations", "Blocks", })
+   @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
+         @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
+         @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
+         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
+         @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
+         @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
+   public final void confirmBlock(
+         @ApiParam(value = "The randomly generated blockId UUID as sent in the original block.", required = true) @PathParam("blockId") String blockId,
+         @ApiParam(value = "The randomly generated UUID identifying this confirmation, as defined for a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).", required = true) @PathParam("confirmationId") String confirmationId,
+         @ApiParam(value = "The block confirmation information.", required = true) BlockConfirmation blockConfirmation,
+         @Context SecurityContext securityContext,
+         @Context Request request,
+         @Suspended AsyncResponse asyncResponse,
+         @Context HttpHeaders httpHeaders,
+         @Context UriInfo uriInfo,
+         @Context HttpServletRequest httpServletRequest) {
+      getResourceImplementation().confirmBlock(
+            blockId,
+            confirmationId,
+            blockConfirmation,
+            securityContext,
+            request,
+            httpHeaders,
+            asyncResponse,
+            uriInfo,
+            httpServletRequest);
+   }
+
+   @POST
    @Path("/{blockId}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
