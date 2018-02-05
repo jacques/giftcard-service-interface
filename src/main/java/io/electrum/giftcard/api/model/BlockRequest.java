@@ -1,6 +1,7 @@
 package io.electrum.giftcard.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
@@ -13,9 +14,29 @@ import javax.validation.constraints.NotNull;
  */
 @ApiModel(description = "Information about the block request being made against the gift card.")
 public class BlockRequest extends Transaction {
+
+   public enum BlockReason {
+      STOP("STOP"),
+      TRANSFER("TRANSFER");
+
+      private String value;
+
+      BlockReason(String value) {
+         this.value = value;
+      }
+
+      @Override
+      @JsonValue
+      public String toString() {
+         return String.valueOf(value);
+      }
+   }
+
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
+
+   private BlockReason blockReason = null;
 
    public BlockRequest card(Card card) {
      this.card = card;
@@ -78,6 +99,26 @@ public class BlockRequest extends Transaction {
       this.product = product;
    }
 
+   public BlockRequest blockReason(BlockReason blockReason){
+      this.blockReason = blockReason;
+      return this;
+   }
+
+   /**
+    * The reason stated for blocking the card.
+    *
+    * @return product
+    **/
+   @ApiModelProperty(value = "The reason stated for blocking the card.")
+   @JsonProperty("blockReason")
+   public BlockReason getBlockReason() {
+      return blockReason;
+   }
+
+   public void setBlockReason(BlockReason blockReason) {
+      this.blockReason = blockReason;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -95,6 +136,7 @@ public class BlockRequest extends Transaction {
       sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
       sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
       sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
+      sb.append("    blockReason: ").append(Utils.toIndentedString(blockReason)).append("\n");
       sb.append("}");
       return sb.toString();
    }
