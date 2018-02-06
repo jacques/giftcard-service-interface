@@ -1,5 +1,12 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.3.0
+
+Released 06 February 2018
+
+- Added Transfer functionality - allow funds to be transferred between gift cards.
+- Added TransferRequest, TransferResponse, TransferConfirmation and TransferReversal.
+
 ## v3.2.0
 
 Released 22 January 2018
