@@ -68,6 +68,7 @@ public class GiftcardAmounts extends Amounts{
       sb.append("    feeAmount: ").append(Utils.toIndentedString(feeAmount)).append("\n");
       sb.append("    balanceAmount: ").append(Utils.toIndentedString(balanceAmount)).append("\n");
       sb.append("    availableBalance: ").append(Utils.toIndentedString(availableBalance)).append("\n");
+      sb.append("    additionalAmounts: ").append(Utils.toIndentedString(additionalAmounts)).append("\n");
       sb.append("}");
       return sb.toString();
    }
