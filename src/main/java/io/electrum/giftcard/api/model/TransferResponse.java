@@ -3,10 +3,15 @@ package io.electrum.giftcard.api.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Transaction;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Information about the transfer made from a source gift card to a target gift card.
+ */
+@ApiModel(description = "Information about the transfer made from a source gift card to a target gift card.")
 public class TransferResponse extends Transaction {
 
    private GiftcardAmounts amounts = null;
@@ -22,11 +27,12 @@ public class TransferResponse extends Transaction {
    }
 
    /**
-    * Specifies the amount which is being transferred from a source giftcard to a target giftcard.
+    * Indicates the amount which was being transferred from a source gift card to a target gift card, the amount which
+    * was transferred and the balance of the source gift card after the transfer
     *
     * @return amounts
     **/
-   @ApiModelProperty(required = true, value = "Specifies the amount which is being transferred from a source giftcard to a target giftcard.")
+   @ApiModelProperty(required = true, value = "Indicates the amount which was being transferred from a source gift card to a target gift card, the amount which was transferred and the balance of the source gift card after the transfer")
    @JsonProperty("amounts")
    @NotNull
    public GiftcardAmounts getAmounts() {
