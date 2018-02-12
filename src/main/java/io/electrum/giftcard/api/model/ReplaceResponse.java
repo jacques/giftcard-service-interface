@@ -14,11 +14,33 @@ import javax.validation.constraints.NotNull;
 @ApiModel(description = "Information about the replace request made to switch an old card with a new card.")
 public class ReplaceResponse extends Transaction {
 
+   private GiftcardAmounts amounts = null;
    private Card oldCard = null;
    private Card newCard = null;
    private PosInfo posInfo = null;
    private Product product = null;
    private SlipData slipData = null;
+
+   public ReplaceResponse amounts(GiftcardAmounts amounts) {
+      this.amounts = amounts;
+      return this;
+   }
+
+   /**
+    * Indicates the balance amount which now exists in the new card (balance from old card transferred to new card).
+    *
+    * @return amounts
+    **/
+   @ApiModelProperty(required = true, value = "Indicates the balance amount which now exists in the new card (balance from old card transferred to new card).")
+   @JsonProperty("amounts")
+   @NotNull
+   public GiftcardAmounts getAmounts() {
+      return amounts;
+   }
+
+   public void setAmounts(GiftcardAmounts amounts) {
+      this.amounts = amounts;
+   }
 
    /**
     * Information about the gift card being replaced.
