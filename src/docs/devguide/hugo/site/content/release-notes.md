@@ -8,6 +8,7 @@ Released 09 February 2018
     - Added TransferRequest, TransferResponse, TransferConfirmation and TransferReversal.
 - Added Replace functionality - allows an old gift card to be replaced with a new gift card
     - Added ReplaceRequest, ReplaceResponse, ReplaceConfirmation and ReplaceReversal.
+- Update ErrorDetail RequestTypes with new Replace and Transfer request operations
 - Updated giftcard-service-interface to latest service-base-interface (version 3.6.0)
     - Updated GiftcardAmounts toString() method to include the additionalAmounts field
  
