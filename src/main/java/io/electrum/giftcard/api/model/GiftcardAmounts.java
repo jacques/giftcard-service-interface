@@ -61,13 +61,14 @@ public class GiftcardAmounts extends Amounts{
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class Amounts {\n");
+      sb.append("class GiftcardAmounts {\n");
 
       sb.append("    requestAmount: ").append(Utils.toIndentedString(requestAmount)).append("\n");
       sb.append("    approvedAmount: ").append(Utils.toIndentedString(approvedAmount)).append("\n");
       sb.append("    feeAmount: ").append(Utils.toIndentedString(feeAmount)).append("\n");
       sb.append("    balanceAmount: ").append(Utils.toIndentedString(balanceAmount)).append("\n");
       sb.append("    availableBalance: ").append(Utils.toIndentedString(availableBalance)).append("\n");
+      sb.append("    additionalAmounts: ").append(Utils.toIndentedString(additionalAmounts)).append("\n");
       sb.append("}");
       return sb.toString();
    }

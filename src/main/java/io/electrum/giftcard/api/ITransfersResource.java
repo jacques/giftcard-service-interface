@@ -1,22 +1,17 @@
 package io.electrum.giftcard.api;
 
-import io.electrum.giftcard.api.model.RedemptionConfirmation;
-import io.electrum.giftcard.api.model.RedemptionRequest;
-import io.electrum.giftcard.api.model.RedemptionReversal;
+import io.electrum.giftcard.api.model.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.AsyncResponse;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 
-public interface IRedemptionsResource {
-   Response confirmRedemption(
-         String redemptionId,
+public interface ITransfersResource {
+
+   Response confirmTransfer(
+         String transferId,
          String confirmationId,
-         RedemptionConfirmation body,
+         TransferConfirmation body,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,
@@ -24,9 +19,9 @@ public interface IRedemptionsResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   Response redeem(
-         String redemptionId,
-         RedemptionRequest body,
+   Response transfer(
+         String transferId,
+         TransferRequest body,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,
@@ -34,10 +29,10 @@ public interface IRedemptionsResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   Response reverseRedemption(
-         String redemptionId,
+   Response reverseTransfer(
+         String transferId,
          String reversalId,
-         RedemptionReversal body,
+         TransferReversal body,
          SecurityContext securityContext,
          Request request,
          HttpHeaders httpHeaders,
