@@ -52,6 +52,7 @@
       <groupId>io.electrum</groupId>
       <artifactId>service-interface-base</artifactId>
       <version>${service-interface-base-version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>joda-time</groupId>
