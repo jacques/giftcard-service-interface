@@ -13,7 +13,7 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 public interface IRedemptionsResource {
-   public Response confirmRedemption(
+   Response confirmRedemption(
          String redemptionId,
          String confirmationId,
          RedemptionConfirmation body,
@@ -24,7 +24,7 @@ public interface IRedemptionsResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   public Response redeem(
+   Response redeem(
          String redemptionId,
          RedemptionRequest body,
          SecurityContext securityContext,
@@ -34,7 +34,7 @@ public interface IRedemptionsResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   public Response reverseRedemption(
+   Response reverseRedemption(
          String redemptionId,
          String reversalId,
          RedemptionReversal body,
