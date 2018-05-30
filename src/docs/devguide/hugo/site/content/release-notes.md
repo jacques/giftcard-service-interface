@@ -1,5 +1,11 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.3.1
+
+Released 30 May
+
+- Added TEMPORARY_FAILURE errorType.
+
 ## v3.3.0
 
 Released 09 February 2018

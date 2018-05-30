@@ -11,12 +11,19 @@ To include the service interface into your maven project, include the below depe
 ```xml
 <dependency>
     <groupId>io.electrum</groupId>
+    <artifactId>service-interface-base</artifactId>
+    <version>3.12.0</version>
+</dependency>
+<dependency>
+    <groupId>io.electrum</groupId>
     <artifactId>giftcard-service-interface</artifactId>
-    <version>3.3.0</version>
+    <version>3.3.1</version>
 </dependency>
 ```
 
-Alternatively, you can download the jar from [Bintray](https://bintray.com/electrumpayments/java-open-source/giftcard-service-interface).
+Alternatively, you can download the jar from Bintray:
+[Service Interface Base]](https://bintray.com/electrumpayments/java-open-source/service-interface-base).
+[Giftcard Service Interface]](https://bintray.com/electrumpayments/java-open-source/giftcard-service-interface).
 
 ## Other languages
 
