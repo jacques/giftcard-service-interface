@@ -2,7 +2,7 @@ machine:
   timezone:
     Africa/Johannesburg
   java:
-    version: oraclejdk7
+    version: oraclejdk8
   services:
     - docker
 
