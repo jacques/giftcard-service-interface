@@ -221,7 +221,7 @@
             </goals>
             <phase>post-integration-test</phase>
             <configuration>
-              <executable>bash</executable>
+              <executable>sh</executable>
               <arguments>
                 <argument>run.sh</argument>
                 <argument>${basedir}</argument>
