@@ -150,4 +150,10 @@ public abstract class LoadsResource {
             uriInfo,
             httpServletRequest);
    }
+
+   public class Operations {
+      public static final String CONFIRM_LOAD = "confirmLoad";
+      public static final String LOAD = "load";
+      public static final String REVERSE_LOAD = "reverseLoad";
+   }
 }

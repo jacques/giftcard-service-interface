@@ -150,4 +150,10 @@ public abstract class RedemptionsResource {
             uriInfo,
             httpServletRequest);
    }
+
+   public class Operations {
+      public static final String CONFIRM_REDEMPTION = "confirmRedemption";
+      public static final String REDEMPTION = "redemption";
+      public static final String REVERSE_REDEMPTION = "reverseRedemption";
+   }
 }

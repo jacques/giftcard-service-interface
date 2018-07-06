@@ -151,4 +151,10 @@ public abstract class ActivationsResource {
             uriInfo,
             httpServletRequest);
    }
+
+   public class Operations {
+      public static final String CONFIRM_ACTIVATION = "confirmActivation";
+      public static final String ACTIVATE = "activate";
+      public static final String REVERSE_ACIVATION = "reverseActivation";
+   }
 }
