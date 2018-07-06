@@ -1,5 +1,11 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.3.2
+
+Released 6 July 2018
+
+- Added `Operations` nested class to each Resource which provides a concrete `String` representation of each operation.
+
 ## v3.3.1
 
 Released 30 May

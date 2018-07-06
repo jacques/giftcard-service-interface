@@ -26,7 +26,7 @@ public abstract class ReplacesResource {
          + "Replace confirmations are advice type messages and should continue to be sent at suitable intervals until a response has "
          + "been received. Multiple confirmation advices may be sent which refer to the same replace request. The net result is that the "
          + "replace request is confirmed once.", authorizations = {
-         @Authorization(value = "httpBasic") }, tags = { "Confirmations", "Replaces", })
+               @Authorization(value = "httpBasic") }, tags = { "Confirmations", "Replaces", })
    @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
@@ -64,7 +64,7 @@ public abstract class ReplacesResource {
          + "A replace is not considered complete until a replace confirmation or replace reversal has been sent and "
          + "acknowledged. A replace request should only be sent once otherwise multiple "
          + "replace requests may occur erroneously.", authorizations = {
-         @Authorization(value = "httpBasic") }, tags = { "Replaces", })
+               @Authorization(value = "httpBasic") }, tags = { "Replaces", })
    @ApiResponses(value = {
          @ApiResponse(code = 201, message = "Created", response = ReplaceResponse.class, responseHeaders = {
                @ResponseHeader(name = "Location", description = "The location of the created load resource", response = String.class) }),
@@ -98,12 +98,12 @@ public abstract class ReplacesResource {
    @Produces({ "application/json" })
    @ApiOperation(value = "Simplistically, a replace reversal undoes a replace request if the replace "
          + "was successfully processed.", notes = "The Replace Reversals endpoint allows "
-         + "replace requests of old gift cards with a new gift cards to be reversed. If the sender of a replace request "
-         + "is uncertain of the state of a replace request then the sender must send a "
-         + "replace reversal. Reversals should continue to be sent at suitable intervals "
-         + "until a response has been received. Multiple reversals may be sent which refer to "
-         + "the same replace request. The net result is that the replace request is reversed once.", authorizations = {
-         @Authorization(value = "httpBasic") }, tags = { "Replaces", "Reversals", })
+               + "replace requests of old gift cards with a new gift cards to be reversed. If the sender of a replace request "
+               + "is uncertain of the state of a replace request then the sender must send a "
+               + "replace reversal. Reversals should continue to be sent at suitable intervals "
+               + "until a response has been received. Multiple reversals may be sent which refer to "
+               + "the same replace request. The net result is that the replace request is reversed once.", authorizations = {
+                     @Authorization(value = "httpBasic") }, tags = { "Replaces", "Reversals", })
    @ApiResponses(value = { @ApiResponse(code = 202, message = "Accepted", response = BasicAdviceResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
@@ -130,6 +130,12 @@ public abstract class ReplacesResource {
             asyncResponse,
             uriInfo,
             httpServletRequest);
+   }
+
+   public class Operations {
+      public static final String CONFIRM_REPLACE = "confirmReplace";
+      public static final String REPLACE = "replace";
+      public static final String REVERSE_REPLACE = "reverseReplace";
    }
 
 }

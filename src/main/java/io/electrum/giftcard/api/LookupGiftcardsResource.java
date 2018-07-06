@@ -68,4 +68,8 @@ public abstract class LookupGiftcardsResource {
             uriInfo,
             httpServletRequest);
    }
+
+   public class Operations{
+        public static final String LOOKUP_GIFTCARD = "lookupGiftcard";
+    }
 }
