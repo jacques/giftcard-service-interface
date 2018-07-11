@@ -28,15 +28,44 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/loads")
+@Path(LoadsResource.PATH)
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @Api(description = "the loads API")
 public abstract class LoadsResource {
    protected abstract ILoadsResource getResourceImplementation();
 
+   public static final String PATH = "/loads";
+
+   public class Load {
+      public static final String OPERATION = "load";
+
+      public class PathParameters {
+         public static final String LOAD_ID = "loadId";
+      }
+   }
+
+   public class ConfirmLoad {
+      public static final String OPERATION = "confirmLoad";
+
+      public class PathParameters {
+         public static final String LOAD_ID = "loadId";
+         public static final String CONFIRMATION_ID = "confirmationId";
+      }
+   }
+
+   public class ReverseLoad {
+      public static final String OPERATION = "reverseLoad";
+
+      public class PathParameters {
+         public static final String LOAD_ID = "loadId";
+         public static final String REVERSAL_ID = "reversalId";
+      }
+   }
+
    @POST
-   @Path("/{loadId}/confirmations/{confirmationId}")
+   @Path("/{" + ConfirmLoad.PathParameters.LOAD_ID + "}/confirmations/{" + ConfirmLoad.PathParameters.CONFIRMATION_ID
+         + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Confirm a load of funds on a gift card.", notes = "The Load Confirmations endpoint "
@@ -74,7 +103,7 @@ public abstract class LoadsResource {
    }
 
    @POST
-   @Path("/{loadId}")
+   @Path("/{" + Load.PathParameters.LOAD_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Request funds to be loaded on a gift card.", notes = "The Loads endpoint "
@@ -110,7 +139,7 @@ public abstract class LoadsResource {
    }
 
    @POST
-   @Path("/{loadId}/reversals/{reversalId}")
+   @Path("/{" + ReverseLoad.PathParameters.LOAD_ID + "}/reversals/{" + ReverseLoad.PathParameters.REVERSAL_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Simplistically, a load reversal undoes a load if the load "
@@ -151,9 +180,4 @@ public abstract class LoadsResource {
             httpServletRequest);
    }
 
-   public class Operations {
-      public static final String CONFIRM_LOAD = "confirmLoad";
-      public static final String LOAD = "load";
-      public static final String REVERSE_LOAD = "reverseLoad";
-   }
 }

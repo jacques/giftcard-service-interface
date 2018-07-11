@@ -13,7 +13,7 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 public interface IActivationsResource {
-   Response confirmActivation(
+   void confirmActivation(
          String activationId,
          String confirmationId,
          ActivationConfirmation body,
@@ -24,7 +24,7 @@ public interface IActivationsResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   Response activate(
+   void activate(
          String activationId,
          ActivationRequest body,
          SecurityContext securityContext,
@@ -34,7 +34,7 @@ public interface IActivationsResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   Response reverseActivation(
+   void reverseActivation(
          String activationId,
          String reversalId,
          ActivationReversal body,

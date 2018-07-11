@@ -10,15 +10,44 @@ import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.*;
 
-@Path("/replaces")
+@Path(ReplacesResource.PATH)
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @Api(description = "the replaces API")
 public abstract class ReplacesResource {
    protected abstract IReplacesResource getResourceImplementation();
 
+   public static final String PATH = "/replaces";
+
+   public class Replace {
+      public static final String OPERATION = "replace";
+
+      public class PathParameters {
+         public static final String REPLACE_ID = "replaceId";
+      }
+   }
+
+   public class ConfirmReplace {
+      public static final String OPERATION = "confirmReplace";
+
+      public class PathParameters {
+         public static final String REPLACE_ID = "replaceId";
+         public static final String CONFIRMATION_ID = "confirmationId";
+      }
+   }
+
+   public class ReverseReplace {
+      public static final String OPERATION = "reverseReplace";
+
+      public class PathParameters {
+         public static final String REPLACE_ID = "redemptionId";
+         public static final String REVERSAL_ID = "reversalId";
+      }
+   }
+
    @POST
-   @Path("/{replaceId}/confirmations/{confirmationId}")
+   @Path("/{" + ConfirmReplace.PathParameters.REPLACE_ID + "}/confirmations/{"
+         + ConfirmReplace.PathParameters.CONFIRMATION_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Confirm a replace request of an old card with a new card.", notes = "The Replace Confirmations endpoint "
@@ -56,7 +85,7 @@ public abstract class ReplacesResource {
    }
 
    @POST
-   @Path("/{replaceId}")
+   @Path("/{" + Replace.PathParameters.REPLACE_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Request a replace of an old gift card with a new gift card.", notes = "The Replace endpoint "
@@ -93,7 +122,8 @@ public abstract class ReplacesResource {
    }
 
    @POST
-   @Path("/{replaceId}/reversals/{reversalId}")
+   @Path("/{" + ReverseReplace.PathParameters.REPLACE_ID + "}/reversals/{" + ReverseReplace.PathParameters.REVERSAL_ID
+         + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Simplistically, a replace reversal undoes a replace request if the replace "
@@ -130,12 +160,6 @@ public abstract class ReplacesResource {
             asyncResponse,
             uriInfo,
             httpServletRequest);
-   }
-
-   public class Operations {
-      public static final String CONFIRM_REPLACE = "confirmReplace";
-      public static final String REPLACE = "replace";
-      public static final String REVERSE_REPLACE = "reverseReplace";
    }
 
 }

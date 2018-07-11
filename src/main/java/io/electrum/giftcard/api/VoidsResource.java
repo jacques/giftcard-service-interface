@@ -16,6 +16,7 @@ import io.swagger.annotations.ResponseHeader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.HttpMethod;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -28,15 +29,45 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/voids")
+@Path(VoidsResource.PATH)
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @Api(description = "the voids API")
 public abstract class VoidsResource {
+
+   public static final String PATH = "/voids";
+
    protected abstract IVoidsResource getResourceImplementation();
 
+   public class VoidGiftcard {
+      public static final String OPERATION = "voidGiftcard";
+
+      public class PathParameters {
+         public static final String VOID_ID = "voidId";
+      }
+   }
+
+   public class ConfirmVoid {
+      public static final String OPERATION = "confirmVoid";
+
+      public class PathParameters {
+         public static final String VOID_ID = "voidId";
+         public static final String CONFIRMATION_ID = "confirmationId";
+      }
+   }
+
+   public class ReverseVoid {
+      public static final String OPERATION = "reverseVoid";
+
+      public class PathParameters {
+         public static final String VOID_ID = "voidId";
+         public static final String REVERSAL_ID = "reversalId";
+      }
+   }
+
    @POST
-   @Path("/{voidId}/confirmations/{confirmationId}")
+   @Path("/{" + ConfirmVoid.PathParameters.VOID_ID + "}/confirmations/{" + ConfirmVoid.PathParameters.CONFIRMATION_ID
+         + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Confirm a void of a gift card.", notes = "The Void Confirmations endpoint "
@@ -74,7 +105,7 @@ public abstract class VoidsResource {
    }
 
    @POST
-   @Path("/{voidId}")
+   @Path("/{" + VoidGiftcard.PathParameters.VOID_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Request a gift card be voided.", notes = "The Voids endpoint "
@@ -111,7 +142,7 @@ public abstract class VoidsResource {
    }
 
    @POST
-   @Path("/{voidId}/reversals/{reversalId}")
+   @Path("/{" + ReverseVoid.PathParameters.VOID_ID + "}/confirmations/{" + ReverseVoid.PathParameters.REVERSAL_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Simplistically, a void reversal undoes a void if the void "
@@ -151,9 +182,4 @@ public abstract class VoidsResource {
             httpServletRequest);
    }
 
-   public class Operations {
-        public static final String CONFIRM_VOID = "confirmVoid";
-        public static final String VOID = "void";
-        public static final String REVERSE_VOID = "reverseVoid";
-    }
 }

@@ -25,16 +25,26 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/lookupGiftcard")
+@Path(LookupGiftcardsResource.PATH)
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @Api(description = "the giftcard API")
 public abstract class LookupGiftcardsResource {
 
+   public static final String PATH = "/lookupGiftcard";
+
    protected abstract ILookupGiftcardsResource getResourceImplementation();
 
+   public class LookupGiftcard {
+      public static final String OPERATION = "lookupGiftcard";
+
+      public class PathParameters {
+         public static final String LOOKUP_ID = "lookupId";
+      }
+   }
+
    @POST
-   @Path("/{lookupId}")
+   @Path("/{" + LookupGiftcard.PathParameters.LOOKUP_ID + "}")
    @Produces({ "application/json" })
    @ApiOperation(value = "Request gift card information.", notes = "The Lookup Gift Cards endpoint "
          + "allows information about a gift card to be retrieved. This operation has no financial impact and may "
@@ -68,8 +78,4 @@ public abstract class LookupGiftcardsResource {
             uriInfo,
             httpServletRequest);
    }
-
-   public class Operations{
-        public static final String LOOKUP_GIFTCARD = "lookupGiftcard";
-    }
 }

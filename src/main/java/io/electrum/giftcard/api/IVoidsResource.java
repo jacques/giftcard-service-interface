@@ -13,7 +13,7 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 public interface IVoidsResource {
-   Response confirmVoid(
+   void confirmVoid(
          String voidId,
          String confirmationId,
          VoidConfirmation body,
@@ -24,7 +24,7 @@ public interface IVoidsResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   Response voidGiftcard(
+   void voidGiftcard(
          String voidId,
          VoidRequest body,
          SecurityContext securityContext,
@@ -34,7 +34,7 @@ public interface IVoidsResource {
          UriInfo uriInfo,
          HttpServletRequest httpServletRequest);
 
-   Response reverseVoid(
+   void reverseVoid(
          String voidId,
          String reversalId,
          VoidReversal body,

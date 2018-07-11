@@ -28,15 +28,44 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/redemptions")
+@Path(RedemptionsResource.PATH)
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @Api(description = "the redemptions API")
 public abstract class RedemptionsResource {
    protected abstract IRedemptionsResource getResourceImplementation();
 
+   public static final String PATH = "/redemptions";
+
+   public class Redeem {
+      public static final String OPERATION = "redeem";
+
+      public class PathParameters {
+         public static final String REDEMPTION_ID = "redemptionId";
+      }
+   }
+
+   public class ConfirmRedemption {
+      public static final String OPERATION = "confirmRedemption";
+
+      public class PathParameters {
+         public static final String REDEMPTION_ID = "redemptionId";
+         public static final String CONFIRMATION_ID = "confirmationId";
+      }
+   }
+
+   public class ReverseRedemption {
+      public static final String OPERATION = "reverseRedemption";
+
+      public class PathParameters {
+         public static final String REDEMPTION_ID = "redemptionId";
+         public static final String REVERSAL_ID = "reversalId";
+      }
+   }
+
    @POST
-   @Path("/{redemptionId}/confirmations/{confirmationId}")
+   @Path("/{" + ConfirmRedemption.PathParameters.REDEMPTION_ID + "}/confirmations/{"
+         + ConfirmRedemption.PathParameters.CONFIRMATION_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Confirm a redemption against a gift card.", notes = "The Redemption Confirmations endpoint "
@@ -74,7 +103,7 @@ public abstract class RedemptionsResource {
    }
 
    @POST
-   @Path("/{redemptionId}")
+   @Path("/{" + Redeem.PathParameters.REDEMPTION_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Request a redemption of a gift card.", notes = "The Redemptions endpoint "
@@ -111,7 +140,8 @@ public abstract class RedemptionsResource {
    }
 
    @POST
-   @Path("/{redemptionId}/reversals/{reversalId}")
+   @Path("/{" + ReverseRedemption.PathParameters.REDEMPTION_ID + "}/reversals/{"
+         + ReverseRedemption.PathParameters.REVERSAL_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Simplistically, a redemption reversal undoes a redemption if the redemption "
@@ -151,9 +181,4 @@ public abstract class RedemptionsResource {
             httpServletRequest);
    }
 
-   public class Operations {
-      public static final String CONFIRM_REDEMPTION = "confirmRedemption";
-      public static final String REDEMPTION = "redemption";
-      public static final String REVERSE_REDEMPTION = "reverseRedemption";
-   }
 }

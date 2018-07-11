@@ -28,7 +28,7 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/activations")
+@Path(ActivationsResource.PATH)
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @Api(description = "the activations API")
@@ -36,8 +36,37 @@ public abstract class ActivationsResource {
 
    protected abstract IActivationsResource getResourceImplementation();
 
+   public static final String PATH = "/activations";
+
+   public class Activate {
+      public static final String OPERATION = "activate";
+
+      public class PathParameters {
+         public static final String ACTIVATION_ID = "activationId";
+      }
+   }
+
+   public class ConfirmActivation {
+      public static final String OPERATION = "confirmActivation";
+
+      public class PathParameters {
+         public static final String ACTIVATION_ID = "activationId";
+         public static final String CONFIRMATION_ID = "confirmationId";
+      }
+   }
+
+   public class ReverseActivation {
+      public static final String OPERATION = "reverseActivation";
+
+      public class PathParameters {
+         public static final String ACTIVATION_ID = "activationId";
+         public static final String REVERSAL_ID = "reversalId";
+      }
+   }
+
    @POST
-   @Path("/{activationId}/confirmations/{confirmationId}")
+   @Path("/{" + ConfirmActivation.PathParameters.ACTIVATION_ID + "}/confirmations/{"
+         + ConfirmActivation.PathParameters.CONFIRMATION_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Confirm a gift card activation.", notes = "The Activation Confirmations endpoint "
@@ -75,7 +104,7 @@ public abstract class ActivationsResource {
    }
 
    @POST
-   @Path("/{activationId}")
+   @Path("/{" + Activate.PathParameters.ACTIVATION_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Request a gift card activation.", notes = "The Activations endpoint allows a "
@@ -112,7 +141,8 @@ public abstract class ActivationsResource {
    }
 
    @POST
-   @Path("/{activationId}/reversals/{reversalId}")
+   @Path("/{" + ReverseActivation.PathParameters.ACTIVATION_ID + "}/reversals/{"
+         + ReverseActivation.PathParameters.REVERSAL_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Simplistically, an activation reversal undoes an activation if the activation "
@@ -152,9 +182,4 @@ public abstract class ActivationsResource {
             httpServletRequest);
    }
 
-   public class Operations {
-      public static final String CONFIRM_ACTIVATION = "confirmActivation";
-      public static final String ACTIVATE = "activate";
-      public static final String REVERSE_ACIVATION = "reverseActivation";
-   }
 }

@@ -1,5 +1,14 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.4.0
+
+Released 11 July 2018
+
+- Changed structure of Resource classes. Each Resource class now contains a nested class relating to each operation.
+The nested classes contain details such as operation name and path parameters.
+- Added `PATH` to each Resource class.
+- Methods in Resource interfaces now return `void`
+
 ## v3.3.2
 
 Released 6 July 2018

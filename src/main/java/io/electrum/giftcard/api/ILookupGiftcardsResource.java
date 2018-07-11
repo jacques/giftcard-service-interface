@@ -11,7 +11,7 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 public interface ILookupGiftcardsResource {
-   Response lookupGiftcard(
+   void lookupGiftcard(
          String lookupId,
          LookupRequest body,
          SecurityContext securityContext,

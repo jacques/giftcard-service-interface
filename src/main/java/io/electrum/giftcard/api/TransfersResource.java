@@ -10,16 +10,45 @@ import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.*;
 
-@Path("/transfers")
+@Path(TransfersResource.PATH)
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @Api(description = "the transfers API")
 public abstract class TransfersResource {
 
+   public static final String PATH = "/transfers";
+
    protected abstract ITransfersResource getResourceImplementation();
 
+   public class Transfer {
+      public static final String OPERATION = "transfer";
+
+      public class PathParameters {
+         public static final String TRANSFER_ID = "transferId";
+      }
+   }
+
+   public class ConfirmTransfer {
+      public static final String OPERATION = "confirmTransfer";
+
+      public class PathParameters {
+         public static final String TRANSFER_ID = "transferId";
+         public static final String CONFIRMATION_ID = "confirmationId";
+      }
+   }
+
+   public class ReverseTransfer {
+      public static final String OPERATION = "reverseTransfer";
+
+      public class PathParameters {
+         public static final String TRANSFER_ID = "transferId";
+         public static final String REVERSAL_ID = "reversalId";
+      }
+   }
+
    @POST
-   @Path("/{transferId}/confirmations/{confirmationId}")
+   @Path("/{" + ConfirmTransfer.PathParameters.TRANSFER_ID + "}/confirmations/{"
+         + ConfirmTransfer.PathParameters.CONFIRMATION_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Confirm a transfer from a source gift card to a target gift card.", notes = "The Transfer Confirmations endpoint registers the confirmation of a prior transfer of a "
@@ -57,7 +86,7 @@ public abstract class TransfersResource {
    }
 
    @POST
-   @Path("/{transferId}")
+   @Path("/{" + Transfer.PathParameters.TRANSFER_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Request a transfer from a source gift card to a target gift card.", notes = "The Transfers endpoint "
@@ -94,7 +123,8 @@ public abstract class TransfersResource {
    }
 
    @POST
-   @Path("/{transferId}/reversals/{reversalId}")
+   @Path("/{" + ReverseTransfer.PathParameters.TRANSFER_ID + "}/reversals/{"
+         + ReverseTransfer.PathParameters.REVERSAL_ID + "}")
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
    @ApiOperation(value = "Simplistically, a transfer reversal undoes a transfer if the transfer "
@@ -131,12 +161,6 @@ public abstract class TransfersResource {
             asyncResponse,
             uriInfo,
             httpServletRequest);
-   }
-
-   public class Operations {
-      public static final String CONFIRM_TRANSFER = "confirmTransfer";
-      public static final String TRANSFER = "transfer";
-      public static final String REVERSE_TRANSFER = "reverseTransfer";
    }
 
 }
