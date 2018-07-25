@@ -1,5 +1,11 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.4.0
+
+Released 23 July 2018
+
+- Added optional cardHolder field to LookupResponse, ActivationRequest and Activation Response.
+
 ## v3.3.2
 
 Released 6 July 2018

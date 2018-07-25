@@ -1,13 +1,14 @@
 package io.electrum.giftcard.api.model;
 
-import io.electrum.vas.Utils;
-import io.electrum.vas.model.Transaction;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.electrum.vas.Utils;
+import io.electrum.vas.model.Customer;
+import io.electrum.vas.model.Transaction;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Information about the result of processing the gift card lookup request.
@@ -20,6 +21,7 @@ public class LookupResponse extends Transaction {
    private PosInfo posInfo = null;
    private Product product = null;
    private SlipData slipData = null;
+   private Customer cardHolder = null;
 
    public LookupResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -27,8 +29,26 @@ public class LookupResponse extends Transaction {
    }
 
    /**
+    * Information about the card holder of the gift card.
+    */
+   @ApiModelProperty(value = "Information about the card holder of the gift card.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
+   public LookupResponse cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   /**
     * Indicates the balance of the gift card at the time of the request.
-    * 
+    *
     * @return amounts
     **/
    @ApiModelProperty(required = true, value = "Indicates the balance of the gift card at the time of the request.")
@@ -44,7 +64,7 @@ public class LookupResponse extends Transaction {
 
    /**
     * Information about the gift card for which information is being requested.
-    * 
+    *
     * @return card
     **/
    @ApiModelProperty(required = true, value = "Information about the gift card for which information is being requested.")
@@ -58,6 +78,11 @@ public class LookupResponse extends Transaction {
       this.card = card;
    }
 
+   public LookupResponse card(Card card) {
+      this.card = card;
+      return this;
+   }
+
    public LookupResponse posInfo(PosInfo posInfo) {
       this.posInfo = posInfo;
       return this;
@@ -65,7 +90,7 @@ public class LookupResponse extends Transaction {
 
    /**
     * Information about how card details were captured at the POS.
-    * 
+    *
     * @return posInfo
     **/
    @ApiModelProperty(required = true, value = "Information about how card details were captured at the POS.")
@@ -86,7 +111,7 @@ public class LookupResponse extends Transaction {
 
    /**
     * Information about the product associated with the gift card if the gift card has been activated.
-    * 
+    *
     * @return product
     **/
    @ApiModelProperty(value = "Information about the product associated with the gift card if the gift card has been activated.")
@@ -116,6 +141,7 @@ public class LookupResponse extends Transaction {
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    product: ").append(Utils.toIndentedString(product)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
+      sb.append("    cardHolder: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }
