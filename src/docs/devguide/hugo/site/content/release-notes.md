@@ -1,5 +1,17 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.5.0
+
+Released 23 August 2018
+
+- Added new Club entity to model
+- Added a PointsAmount entity to describe relevant information about points in a transaction.
+- Added a PointAmounts entity to hold relevant point amounts in a transaction.
+- Added optional rank field to Card entity.
+- Added optional points (PointAmounts)  and clubs fields to the LookupResponse.
+- Added points (PointAmounts) field to the RedemptionRequest and RedemptionResponse.
+
+
 ## v3.4.0
 
 Released 23 July 2018

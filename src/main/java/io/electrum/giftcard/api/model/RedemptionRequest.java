@@ -1,5 +1,6 @@
 package io.electrum.giftcard.api.model;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,6 +21,7 @@ public class RedemptionRequest extends Transaction {
    private PosInfo posInfo = null;
    private Product product = null;
    private Basket basket = null;
+   private PointAmounts points = null;
 
    public RedemptionRequest amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -123,6 +125,27 @@ public class RedemptionRequest extends Transaction {
       this.basket = basket;
    }
 
+   public RedemptionRequest points(PointAmounts points) {
+      this.points = points;
+      return this;
+   }
+
+   /**
+    * Specifies the points amount which the gift card is being redeemed against.
+    *
+    * @return points
+    **/
+   @ApiModelProperty(value = "Specifies the points amount which the gift card is being redeemed against.")
+   @JsonProperty("points")
+   @Valid
+   public PointAmounts getPoints() {
+      return points;
+   }
+
+   public void setPoints(PointAmounts points) {
+      this.points = points;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -142,6 +165,7 @@ public class RedemptionRequest extends Transaction {
       sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
       sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
       sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
+      sb.append("    points: ").append(Utils.toIndentedString(points)).append("\n");
       sb.append("}");
       return sb.toString();
    }

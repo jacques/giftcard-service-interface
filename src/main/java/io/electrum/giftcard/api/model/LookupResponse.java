@@ -1,5 +1,6 @@
 package io.electrum.giftcard.api.model;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,6 +10,9 @@ import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Information about the result of processing the gift card lookup request.
@@ -22,6 +26,8 @@ public class LookupResponse extends Transaction {
    private Product product = null;
    private SlipData slipData = null;
    private Customer cardHolder = null;
+   private PointAmounts points = null;
+   private List<Club> clubs = new ArrayList<>();
 
    public LookupResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -124,6 +130,48 @@ public class LookupResponse extends Transaction {
       this.product = product;
    }
 
+   public LookupResponse points(PointAmounts points) {
+      this.points = points;
+      return this;
+   }
+
+   /**
+    * Information on points associated with this card. For example: balance, currency value.
+    *
+    * @return points
+    **/
+   @ApiModelProperty(value = "Information on points associated with this card. For example: balance, currency value.")
+   @JsonProperty("points")
+   @Valid
+   public PointAmounts getPoints() {
+      return points;
+   }
+
+   public void setPoints(PointAmounts points) {
+      this.points = points;
+   }
+
+   public LookupResponse clubs(List<Club> clubs) {
+      this.clubs = clubs;
+      return this;
+   }
+
+   /**
+    * The clubs associated with this card.
+    *
+    * @return clubs
+    **/
+   @ApiModelProperty(value = "The clubs associated with this card.")
+   @JsonProperty("clubs")
+   @Valid
+   public List<Club> getClubs() {
+      return clubs;
+   }
+
+   public void setClubs(List<Club> clubs) {
+      this.clubs = clubs;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -142,6 +190,8 @@ public class LookupResponse extends Transaction {
       sb.append("    product: ").append(Utils.toIndentedString(product)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
       sb.append("    cardHolder: ").append(Utils.toIndentedString(cardHolder)).append("\n");
+      sb.append("    points: ").append(Utils.toIndentedString(points)).append("\n");
+      sb.append("    clubs: ").append(Utils.toIndentedString(clubs)).append("\n");
       sb.append("}");
       return sb.toString();
    }

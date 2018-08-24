@@ -12,15 +12,16 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Information about a gift card; its number, expiry date and optionally the PIN either unencrypted or encrypted.
+ * Information about a gift card; its number, rank, expiry date and optionally the PIN either unencrypted or encrypted.
  */
-@ApiModel(description = "Information about a gift card; its number, expiry date and optionally the PIN either unencrypted or encrypted.")
+@ApiModel(description = "Information about a gift card; its number, rank, expiry date and optionally the PIN either unencrypted or encrypted.")
 public class Card {
 
    private String pan = null;
    private String expiryDate = null;
    private String clearPin = null;
    private String encryptedPin = null;
+   private String rank;
 
    public Card pan(String pan) {
       this.pan = pan;
@@ -106,6 +107,26 @@ public class Card {
       this.encryptedPin = encryptedPin;
    }
 
+   public Card rank(String rank) {
+      this.rank = rank;
+      return this;
+   }
+
+   /**
+    * The rank of the card on the Giftcard system. For example: primary, secondary, collector.
+    *
+    * @return rank
+    **/
+   @ApiModelProperty(value = "The rank of the card on the Giftcard system. For example: primary, secondary, collector.")
+   @JsonProperty("rank")
+   public String getRank() {
+      return rank;
+   }
+
+   public void setRank(String rank) {
+      this.rank = rank;
+   }
+
    @Override
    public boolean equals(java.lang.Object o) {
       if (this == o) {
@@ -116,12 +137,13 @@ public class Card {
       }
       Card card = (Card) o;
       return Objects.equals(this.pan, card.pan) && Objects.equals(this.expiryDate, card.expiryDate)
-            && Objects.equals(this.clearPin, card.clearPin) && Objects.equals(this.encryptedPin, card.encryptedPin);
+            && Objects.equals(this.clearPin, card.clearPin) && Objects.equals(this.encryptedPin, card.encryptedPin)
+            && Objects.equals(this.rank, card.rank);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(pan, expiryDate, clearPin, encryptedPin);
+      return Objects.hash(pan, expiryDate, clearPin, encryptedPin, rank);
    }
 
    @Override
@@ -133,6 +155,7 @@ public class Card {
       sb.append("    expiryDate: ").append(Utils.toIndentedString(expiryDate)).append("\n");
       sb.append("    clearPin: ").append(Utils.toIndentedString(clearPin)).append("\n");
       sb.append("    encryptedPin: ").append(Utils.toIndentedString(encryptedPin)).append("\n");
+      sb.append("    rank: ").append(Utils.toIndentedString(rank)).append("\n");
       sb.append("}");
       return sb.toString();
    }

@@ -6,6 +6,7 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,6 +23,7 @@ public class RedemptionResponse extends Transaction {
    private Product product = null;
    private Basket basket = null;
    private SlipData slipData = null;
+   private PointAmounts points = null;
 
    public RedemptionResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -120,6 +122,27 @@ public class RedemptionResponse extends Transaction {
       this.basket = basket;
    }
 
+   public RedemptionResponse points(PointAmounts points) {
+      this.points = points;
+      return this;
+   }
+
+   /**
+    * Specifies the points amount for the account the giftcard is associated with.
+    *
+    * @return points
+    **/
+   @ApiModelProperty(value = "Specifies the points amount for the account the giftcard is associated with.")
+   @JsonProperty("points")
+   @Valid
+   public PointAmounts getPoints() {
+      return points;
+   }
+
+   public void setPoints(PointAmounts points) {
+      this.points = points;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -140,6 +163,7 @@ public class RedemptionResponse extends Transaction {
       sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
       sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
       sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
+      sb.append("    points: ").append(Utils.toIndentedString(points)).append("\n");
       sb.append("}");
       return sb.toString();
    }
