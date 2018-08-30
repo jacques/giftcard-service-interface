@@ -1,5 +1,12 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.6.0
+
+Released 30 August 2018
+
+- Added new MarketingAttribute entity to model
+- Added list of MarketingAttributes to LookupResponse
+
 ## v3.5.0
 
 Released 23 August 2018

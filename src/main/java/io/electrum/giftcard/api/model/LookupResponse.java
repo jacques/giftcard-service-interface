@@ -28,6 +28,7 @@ public class LookupResponse extends Transaction {
    private Customer cardHolder = null;
    private PointAmounts points = null;
    private List<Club> clubs = new ArrayList<>();
+   private List<MarketingAttribute> marketingAttributes = new ArrayList<>();
 
    public LookupResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -172,6 +173,27 @@ public class LookupResponse extends Transaction {
       this.clubs = clubs;
    }
 
+   public LookupResponse marketingAttributes(List<MarketingAttribute> marketingAttributes) {
+      this.marketingAttributes = marketingAttributes;
+      return this;
+   }
+
+   /**
+    * The marketing attributes associated with this card.
+    *
+    * @return list of marketing attributes
+    **/
+   @ApiModelProperty(value = "The marketing attributes associated with this card.")
+   @JsonProperty("marketingAttributes")
+   @Valid
+   public List<MarketingAttribute> getMarketingAttributes() {
+      return marketingAttributes;
+   }
+
+   public void setMarketingAttributes(List<MarketingAttribute> marketingAttributes) {
+      this.marketingAttributes = marketingAttributes;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -192,6 +214,7 @@ public class LookupResponse extends Transaction {
       sb.append("    cardHolder: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("    points: ").append(Utils.toIndentedString(points)).append("\n");
       sb.append("    clubs: ").append(Utils.toIndentedString(clubs)).append("\n");
+      sb.append("    marketingAttributes: ").append(Utils.toIndentedString(marketingAttributes)).append("\n");
       sb.append("}");
       return sb.toString();
    }
