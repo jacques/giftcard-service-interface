@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Information about a gift card to be retrieved.
  */ 
 @ApiModel(description = "Information about a gift card to be retrieved.")
-public class LookupRequest extends Transaction {
+public class LookupRequest extends Transaction implements IGiftCardTransaction{
 
    private Card card = null;
    private PosInfo posInfo = null;

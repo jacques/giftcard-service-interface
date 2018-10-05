@@ -13,13 +13,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Information about the load made on the gift card.
  */
 @ApiModel(description = "Information about the load made on the gift card.")
-public class LoadResponse extends Transaction {
+public class LoadResponse extends Transaction implements IGiftCardExtTransaction{
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
-   private SlipData slipData = null;
 
    public LoadResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;

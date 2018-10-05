@@ -1,5 +1,11 @@
 package io.electrum.giftcard.api.model;
 
+import io.electrum.sdk.masking2.DoNotPersist;
+import io.electrum.sdk.masking2.MaskAll;
+import io.electrum.sdk.masking2.MaskPan;
+import io.electrum.sdk.masking2.Masked;
+import io.electrum.vas.Utils;
+
 import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
@@ -7,7 +13,6 @@ import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -37,6 +42,8 @@ public class Card {
    @JsonProperty("pan")
    @NotNull
    @Pattern(regexp = "[0-9]{1,19}")
+   @Masked(MaskPan.class)
+   @DoNotPersist(replacementValue = "000000000000")
    public String getPan() {
       return pan;
    }
@@ -78,6 +85,8 @@ public class Card {
     **/
    @ApiModelProperty(value = "The pin number associated with the card unencrypted.")
    @JsonProperty("clearPin")
+   @Masked
+   @DoNotPersist(replacementValue = "00000")
    public String getClearPin() {
       return clearPin;
    }
@@ -99,6 +108,8 @@ public class Card {
    @ApiModelProperty(value = "The encrypted pin number associated with the card in HEX format.")
    @JsonProperty("encryptedPin")
    @Pattern(regexp = "[0-9ABCDEF]+")
+   @Masked
+   @DoNotPersist(replacementValue = "0000000000000000")
    public String getEncryptedPin() {
       return encryptedPin;
    }
@@ -151,10 +162,10 @@ public class Card {
       StringBuilder sb = new StringBuilder();
       sb.append("class Card {\n");
 
-      sb.append("    pan: ").append(Utils.toIndentedString(pan)).append("\n");
+      sb.append("    pan: ").append(Utils.toIndentedString(new MaskPan().mask(pan))).append("\n");
       sb.append("    expiryDate: ").append(Utils.toIndentedString(expiryDate)).append("\n");
-      sb.append("    clearPin: ").append(Utils.toIndentedString(clearPin)).append("\n");
-      sb.append("    encryptedPin: ").append(Utils.toIndentedString(encryptedPin)).append("\n");
+      sb.append("    clearPin: ").append(Utils.toIndentedString(new MaskAll().mask(clearPin))).append("\n");
+      sb.append("    encryptedPin: ").append(Utils.toIndentedString(new MaskAll().mask(encryptedPin))).append("\n");
       sb.append("    rank: ").append(Utils.toIndentedString(rank)).append("\n");
       sb.append("}");
       return sb.toString();

@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Information about the redemption being made on the gift card.
  */
 @ApiModel(description = "Information about the redemption being made on the gift card.")
-public class RedemptionRequest extends Transaction {
+public class RedemptionRequest extends Transaction implements IGiftCardExtTransaction{
 
    private GiftcardAmounts amounts = null;
    private Card card = null;

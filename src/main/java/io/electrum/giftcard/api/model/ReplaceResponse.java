@@ -12,14 +12,13 @@ import javax.validation.constraints.NotNull;
  * Information about the replace request made to switch an old card with a new card.
  */
 @ApiModel(description = "Information about the replace request made to switch an old card with a new card.")
-public class ReplaceResponse extends Transaction {
+public class ReplaceResponse extends Transaction implements IGiftCardTargetTransaction {
 
    private GiftcardAmounts amounts = null;
    private Card oldCard = null;
    private Card newCard = null;
    private PosInfo posInfo = null;
    private Product product = null;
-   private SlipData slipData = null;
 
    public ReplaceResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -79,6 +78,16 @@ public class ReplaceResponse extends Transaction {
       return this;
    }
 
+   @Override
+   public Card getCard() {
+      return getOldCard();
+   }
+
+   @Override
+   public void setCard(Card card) {
+      setOldCard(card);
+   }
+
    /**
     * Information about the POS.
     *
@@ -135,5 +144,15 @@ public class ReplaceResponse extends Transaction {
       sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
       sb.append("}");
       return sb.toString();
+   }
+
+   @Override
+   public Card getTargetCard() {
+      return getNewCard();
+   }
+
+   @Override
+   public void setTargetCard(Card targetCard) {
+      setNewCard(newCard);
    }
 }

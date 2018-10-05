@@ -1,5 +1,13 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.7.0
+
+Released 14 September 2018
+
+- MarketingAttribute Entity:
+    - Making the member, marketToCustomer field required 
+    - Making the member, marketToCustomer field default to false 
+
 ## v3.6.0
 
 Released 30 August 2018

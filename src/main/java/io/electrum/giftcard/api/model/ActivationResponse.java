@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Information about the result of processing the card activation.
  */
 @ApiModel(description = "Information about the result of processing the card activation.")
-public class ActivationResponse extends Transaction {
+public class ActivationResponse extends Transaction implements IGiftCardExtTransaction {
 
    private GiftcardAmounts amounts = null;
    private Card card = null;

@@ -18,13 +18,12 @@ import java.util.List;
  * Information about the result of processing the gift card lookup request.
  */
 @ApiModel(description = "Information about the result of processing the gift card lookup request.")
-public class LookupResponse extends Transaction {
+public class LookupResponse extends Transaction implements IGiftCardExtTransaction{
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
-   private SlipData slipData = null;
    private Customer cardHolder = null;
    private PointAmounts points = null;
    private List<Club> clubs = new ArrayList<>();

@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Information about the load being made on the gift card.
  */
 @ApiModel(description = "Information about the load being made on the gift card.")
-public class LoadRequest extends Transaction {
+public class LoadRequest extends Transaction implements IGiftCardExtTransaction{
 
    private GiftcardAmounts amounts = null;
    private Card card = null;

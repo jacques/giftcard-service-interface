@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * Information about the transfer being from a source gift card to a target gift card.
  */
 @ApiModel(description = "Information about the transfer being from a source gift card to a target gift card.")
-public class TransferRequest extends Transaction {
+public class TransferRequest extends Transaction implements IGiftCardTargetTransaction {
 
    private GiftcardAmounts amounts = null;
    private Card sourceCard = null;
@@ -86,6 +86,16 @@ public class TransferRequest extends Transaction {
    public TransferRequest posInfo(PosInfo posInfo) {
       this.posInfo = posInfo;
       return this;
+   }
+
+   @Override
+   public Card getCard() {
+      return getSourceCard();
+   }
+
+   @Override
+   public void setCard(Card card) {
+      setSourceCard(card);
    }
 
    /**

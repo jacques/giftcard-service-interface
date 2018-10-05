@@ -11,13 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Information about the outcome of voiding process.
  */
 @ApiModel(description = "Information about the outcome of voiding process.")
-public class VoidResponse extends Transaction {
+public class VoidResponse extends Transaction implements IGiftCardExtTransaction {
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
-   private SlipData slipData = null;
+
 
    public VoidResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -110,7 +110,7 @@ public class VoidResponse extends Transaction {
       sb.append("    card: ").append(Utils.toIndentedString(card)).append("\n");
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    product: ").append(Utils.toIndentedString(product)).append("\n");
-      sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
+      sb.append("    slipData: ").append(Utils.toIndentedString(super.slipData)).append("\n");
       sb.append("}");
       return sb.toString();
    }

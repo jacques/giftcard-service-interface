@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * Information about the replace request to switch an old card with a new card (Transfer funds out of and void old card).
  */
 @ApiModel(description = "Information about the replace request to switch an old card with a new card (Transfer funds out of and void old card).")
-public class ReplaceRequest extends Transaction {
+public class ReplaceRequest extends Transaction implements IGiftCardTargetTransaction {
 
    private Card oldCard = null;
    private Card newCard = null;
@@ -64,6 +64,16 @@ public class ReplaceRequest extends Transaction {
    public ReplaceRequest posInfo(PosInfo posInfo) {
       this.posInfo = posInfo;
       return this;
+   }
+
+   @Override
+   public Card getCard() {
+      return getOldCard();
+   }
+
+   @Override
+   public void setCard(Card card) {
+      setOldCard(card);
    }
 
    /**
@@ -123,4 +133,13 @@ public class ReplaceRequest extends Transaction {
       return sb.toString();
    }
 
+   @Override
+   public Card getTargetCard() {
+      return getNewCard();
+   }
+
+   @Override
+   public void setTargetCard(Card targetCard) {
+      setNewCard(targetCard);
+   }
 }

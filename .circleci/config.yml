@@ -1,0 +1,133 @@
+version: 2
+jobs:
+  build-and-release:
+    docker:
+      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+    steps:
+      - setup_remote_docker
+      - checkout
+      - restore_cache:
+          # if you ever need to invalidate the cache, simply bump the version number
+          keys:
+            - v1-maven-{{ .Branch }}-{{ checksum "pom.xml" }}
+            - v1-maven-{{ .Branch }}
+      - run:
+          name: Download dependencies
+          command: mvn dependency:resolve-plugins dependency:go-offline -B -Dstyle.color=always
+      - save_cache:
+          paths:
+            - ~/.m2/repository
+          key: v1-maven-{{ .Branch }}-{{ checksum "pom.xml" }}
+      - run:
+          name: Validate release type
+          command: /electrum/bin/validateReleaseType.sh
+      - run:
+          name: Compile, Test, and Release
+          command: /electrum/bin/simpleTestAndReleaseJava.sh
+      - run:
+          name: Deploy docs to Github Pages
+          command: /electrum/bin/deployGithubPages.sh ~/project/target/devguide/site
+      - run:
+          name: Release failed! Revert any release steps that might have been taken
+          command: /electrum/bin/revertReleaseJava.sh
+          when: on_fail
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/tests/
+            if [ -d target/surefire-reports ]; then mkdir -p ~/tests/surefire/; cp target/surefire-reports/*.xml ~/tests/surefire/; fi
+            if [ -d target/failsafe-reports ]; then mkdir -p ~/tests/failsafe/; cp target/failsafe-reports/*.xml ~/tests/failsafe/; fi
+          when: always
+      - store_test_results:
+          path: ~/tests
+      - store_artifacts:
+          path: ~/tests
+          destination: tests
+      - store_artifacts:
+          path: logs
+          destination: logs
+      - store_artifacts:
+          path: release
+          destination: release
+  code-coverage-report:
+    docker:
+      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+    steps:
+      - checkout
+      - restore_cache:
+          # if you ever need to invalidate the cache, simply bump the version number
+          keys:
+            - v1-maven-{{ .Branch }}-{{ checksum "pom.xml" }}
+            - v1-maven-{{ .Branch }}
+      - run:
+          name: Generate code coverage report
+          command: mvn cobertura:cobertura -B -Dstyle.color=always
+      - store_artifacts:
+          path: target/site/cobertura
+          destination: coverage
+  build-with-latest-deps:
+    docker:
+      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
+        aws_auth:
+          aws_access_key_id: $AWS_ACCESS_KEY_ID
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+    steps:
+      - setup_remote_docker
+      - checkout
+      - restore_cache:
+          # if you ever need to invalidate the cache, simply bump the version number
+          keys:
+            - v1-maven-{{ .Branch }}-{{ checksum "pom.xml" }}
+            - v1-maven-{{ .Branch }}
+      - run:
+          name: Update pom with latest Electrum deps
+          command: /electrum/bin/updatePomWithLatestDeps.sh
+      - run:
+          name: Test, but only if any Electrum dependencies changed
+          command: /electrum/bin/testWithUpdatedDepsJava.sh
+      - run:
+          name: Notify failure to slack
+          command: /electrum/bin/notifySlackDepBuildFailed.sh
+          when: on_fail
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/tests/
+            if [ -d target/surefire-reports ]; then mkdir -p ~/tests/surefire/; cp target/surefire-reports/*.xml ~/tests/surefire/; fi
+            if [ -d target/failsafe-reports ]; then mkdir -p ~/tests/failsafe/; cp target/failsafe-reports/*.xml ~/tests/failsafe/; fi
+          when: always
+      - store_test_results:
+          path: ~/tests
+      - store_artifacts:
+          path: ~/tests
+          destination: tests
+      - store_artifacts:
+          path: logs
+          destination: logs
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-and-release:
+          context: java
+      - code-coverage-report:
+          context: java
+  nightly:
+    jobs:
+      - build-with-latest-deps:
+          context: java
+    triggers:
+      - schedule:
+          # every night at 00:00 SAST (22:00 UTC)
+          cron: "00 22 * * *"
+          filters:
+            branches:
+              only:
+                - master

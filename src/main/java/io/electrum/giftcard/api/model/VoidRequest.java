@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Information about the void of the gift card.
  */
 @ApiModel(description = "Information about the void of the gift card.")
-public class VoidRequest extends Transaction {
+public class VoidRequest extends Transaction implements IGiftCardTransaction{
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
