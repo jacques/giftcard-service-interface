@@ -38,18 +38,18 @@ echo ''
 docker create -v /src -v /output --name configs alpine:3.4 /bin/true
 docker cp ${BASE_DIR}/target/devguide/hugo/. configs:/src
 docker run \
-#  --volumes-from configs \
-#  --name hugo \
-#  -e "HUGO_THEME=hugo-material-docs" \
-#  -e "HUGO_BASEURL=https://electrumpayments.github.io/giftcard-service-interface-docs/" \
-#  jojomi/hugo:0.29
-docker run \
   --volumes-from configs \
   --name hugo \
   -e "HUGO_THEME=hugo-material-docs" \
-  -e "HUGO_BASEURL=/" \
+  -e "HUGO_BASEURL=https://electrumpayments.github.io/giftcard-service-interface-docs/" \
   jojomi/hugo:0.29
-docker cp hugo:/output/. ${BASE_DIR}/target/devguide/site
+#docker run \
+#  --volumes-from configs \
+#  --name hugo \
+#  -e "HUGO_THEME=hugo-material-docs" \
+#  -e "HUGO_BASEURL=/" \
+#  jojomi/hugo:0.29
+#docker cp hugo:/output/. ${BASE_DIR}/target/devguide/site
 
 
 docker stop hugo &> /dev/null
