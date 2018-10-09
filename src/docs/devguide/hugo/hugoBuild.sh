@@ -49,7 +49,7 @@ docker run \
 #  -e "HUGO_THEME=hugo-material-docs" \
 #  -e "HUGO_BASEURL=/" \
 #  jojomi/hugo:0.29
-#docker cp hugo:/output/. ${BASE_DIR}/target/devguide/site
+docker cp hugo:/output/. ${BASE_DIR}/target/devguide/site
 
 
 docker stop hugo &> /dev/null
