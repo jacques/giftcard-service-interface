@@ -12,12 +12,12 @@ To include the service interface into your maven project, include the below depe
 <dependency>
     <groupId>io.electrum</groupId>
     <artifactId>service-interface-base</artifactId>
-    <version>3.14.0</version>
+    <version>3.16.0</version>
 </dependency>
 <dependency>
     <groupId>io.electrum</groupId>
     <artifactId>giftcard-service-interface</artifactId>
-    <version>3.5.0</version>
+    <version>3.8.0</version>
 </dependency>
 ```
 

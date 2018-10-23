@@ -1,12 +1,34 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.8.0
+
+Released 23 October 2018
+
+- Updated base API dependency to v3.16.0:
+    - Added an `msisdn` field to the `Customer` model to carry the customer's cellphone number.
+    - Added a `PosInfo` model to capture POS information this also contains the following sub-fields:
+      - a `PosEntryMode` model which defines how PAN and PIN information was captured,
+      - a `PosConditionCode` enumeration which indicates the POS circumstances of the transaction.
+    - Added a new `PaymentMethod` called `Card` for card based payments.
+- Added a `cardHolder` field of type `Customer` to the following request and response messages:
+  - `LoadRequest`
+  - `LoadResponse`
+  - `RedemptionRequest`
+  - `RedemptionResponse`
+  - `ReplaceRequest`
+  - `ReplaceResponse`
+  - `TransferRequest`
+  - `TransferResponse`
+  - `VoidRequest`
+  - `VoidResponse`
+
 ## v3.7.0
 
 Released 14 September 2018
 
 - MarketingAttribute Entity:
-    - Making the member, marketToCustomer field required 
-    - Making the member, marketToCustomer field default to false 
+    - Making the member, marketToCustomer field required
+    - Making the member, marketToCustomer field default to false
 
 ## v3.6.0
 
@@ -56,7 +78,7 @@ Released 09 February 2018
 - Update ErrorDetail RequestTypes with new Replace and Transfer request operations
 - Updated giftcard-service-interface to latest service-base-interface (version 3.6.0)
     - Updated GiftcardAmounts toString() method to include the additionalAmounts field
- 
+
 ## v3.2.0
 
 Released 22 January 2018

@@ -2,6 +2,7 @@ package io.electrum.giftcard.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,6 +19,7 @@ public class ReplaceRequest extends Transaction implements IGiftCardTargetTransa
    private Card newCard = null;
    private PosInfo posInfo = null;
    private Product product = null;
+   private Customer cardHolder = null;
 
    public ReplaceRequest oldCard(Card oldCard) {
       this.oldCard = oldCard;
@@ -111,6 +113,26 @@ public class ReplaceRequest extends Transaction implements IGiftCardTargetTransa
       this.product = product;
    }
 
+   public ReplaceRequest cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   /**
+    * Information about the card holder.
+    * 
+    * @return cardHolder
+    **/
+   @ApiModelProperty(value = "Information about the card holder.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -129,6 +151,7 @@ public class ReplaceRequest extends Transaction implements IGiftCardTargetTransa
       sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
       sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
       sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
+      sb.append("    customer: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }

@@ -1,11 +1,12 @@
 package io.electrum.giftcard.api.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Information about the outcome of voiding process.
@@ -17,6 +18,7 @@ public class VoidResponse extends Transaction implements IGiftCardExtTransaction
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
+   private Customer cardHolder = null;
 
 
    public VoidResponse amounts(GiftcardAmounts amounts) {
@@ -94,6 +96,26 @@ public class VoidResponse extends Transaction implements IGiftCardExtTransaction
       this.product = product;
    }
 
+   public VoidResponse cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   /**
+    * Information about the card holder.
+    * 
+    * @return cardHolder
+    **/
+   @ApiModelProperty(value = "Information about the card holder.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -111,6 +133,7 @@ public class VoidResponse extends Transaction implements IGiftCardExtTransaction
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    product: ").append(Utils.toIndentedString(product)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(super.slipData)).append("\n");
+      sb.append("    customer: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }

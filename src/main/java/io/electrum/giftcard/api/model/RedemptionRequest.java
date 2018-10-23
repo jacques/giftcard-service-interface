@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -22,6 +23,7 @@ public class RedemptionRequest extends Transaction implements IGiftCardExtTransa
    private Product product = null;
    private Basket basket = null;
    private PointAmounts points = null;
+   private Customer cardHolder = null;
 
    public RedemptionRequest amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -146,6 +148,26 @@ public class RedemptionRequest extends Transaction implements IGiftCardExtTransa
       this.points = points;
    }
 
+   public RedemptionRequest cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   /**
+    * Information about the card holder.
+    * 
+    * @return cardHolder
+    **/
+   @ApiModelProperty(value = "Information about the card holder.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -166,6 +188,7 @@ public class RedemptionRequest extends Transaction implements IGiftCardExtTransa
       sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
       sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
       sb.append("    points: ").append(Utils.toIndentedString(points)).append("\n");
+      sb.append("    customer: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }
