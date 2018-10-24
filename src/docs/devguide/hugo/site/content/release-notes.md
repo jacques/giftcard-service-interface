@@ -1,5 +1,12 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.9.0
+
+Released 24 October 2018
+
+- Added `PosConditionCode` enumeration to the `PosInfo` model defined in the Giftcard Service Interface.
+  - Giftcard Service Interface v3.8.0 added a similar `posConditionCode` to the `PosInfo` model defined in v3.16.0 of the base API.
+
 ## v3.8.0
 
 Released 23 October 2018
