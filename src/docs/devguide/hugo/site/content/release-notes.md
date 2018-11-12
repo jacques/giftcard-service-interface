@@ -1,5 +1,14 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.10.0
+
+Released 12 November 2018
+
+- Added `cardHolder` field to `LookupRequest` which contains a `Customer` object. As part of this change, the `card` 
+field is no longer mandatory, but one of either `card` or `cardHolder` should be set. 
+- Less restrictive validation on the `type` field of the `Product` definition: the `type` string may now contain any 
+characters and be up to 50 characters long.
+
 ## v3.9.0
 
 Released 24 October 2018

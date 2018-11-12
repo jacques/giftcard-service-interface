@@ -1,11 +1,10 @@
 package io.electrum.giftcard.api.model;
 
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
-import io.electrum.vas.model.Amounts;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,6 +17,7 @@ public class LookupRequest extends Transaction implements IGiftCardTransaction{
 
    private Card card = null;
    private PosInfo posInfo = null;
+   private Customer cardHolder = null;
 
    public LookupRequest card(Card card) {
       this.card = card;
@@ -29,9 +29,8 @@ public class LookupRequest extends Transaction implements IGiftCardTransaction{
     * 
     * @return card
     **/
-   @ApiModelProperty(required = true, value = "Information about the gift card being retrieved.")
+   @ApiModelProperty(value = "Information about the gift card being retrieved. Either this field or the cardHolder field should be set.")
    @JsonProperty("card")
-   @NotNull
    public Card getCard() {
       return card;
    }
@@ -60,6 +59,26 @@ public class LookupRequest extends Transaction implements IGiftCardTransaction{
       this.posInfo = posInfo;
    }
 
+   /**
+    * Information about the card holder
+    *
+    * @return cardHolder
+    **/
+   @ApiModelProperty(value = "Information about the card holder. Either this field or the card field should be set.")
+   @JsonProperty("cardHolder")
+   public LookupRequest cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -74,6 +93,7 @@ public class LookupRequest extends Transaction implements IGiftCardTransaction{
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
       sb.append("    card: ").append(Utils.toIndentedString(card)).append("\n");
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
+      sb.append("    cardHolder: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }
