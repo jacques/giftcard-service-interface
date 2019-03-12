@@ -1,5 +1,18 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.12.0
+
+Released 12 March 2019
+- Updated base API dependency to v3.19.0
+    - Added explicit fields for STAN and RRN values to `BasicAdvice` and `Transaction` models.
+    - Added `ExchangeRate` to describe the exchange rate between two currencies
+    - Added `Account` to describe more varied accounts in a consistent manner. This has the following sub-types defined:
+    - The limitations on the `id` field of the `Institution` model have been removed to make the field suitable for a wider range of applications.
+    - Added `Pin` base model with `PinClear` to describe PINs in the clear and `PinEncrypted` to describe encrypted PINs.
+    - `Pin` was added to `CardPayment`, taking precedence over the existing `encyptedPin` field
+- Added a `PIN_ATTEMPTS_EXCEEDED` `ErrorType` for uses when a transaction is declined due to previous incorrect pin response exceeding a limit.
+- Added a `Pin` to `Card` for better handling of clear and encrypted pins. 
+
 ## v3.11.0
 
 Released 25 February 2019

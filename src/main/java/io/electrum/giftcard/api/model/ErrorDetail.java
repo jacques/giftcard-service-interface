@@ -1,9 +1,5 @@
 package io.electrum.giftcard.api.model;
 
-import io.electrum.vas.Utils;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
@@ -12,6 +8,10 @@ import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.electrum.vas.Utils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Represents the outcome of a completed transaction
@@ -41,7 +41,8 @@ public class ErrorDetail {
       CARD_EXPIRED("CARD_EXPIRED"),
       INCORRECT_PIN("INCORRECT_PIN"),
       TEMPORARY_FAILURE("TEMPORARY_FAILURE"),
-      DO_NOT_HONOUR("DO_NOT_HONOUR");
+      DO_NOT_HONOUR("DO_NOT_HONOUR"),
+      PIN_ATTEMPTS_EXCEEDED("PIN_ATTEMPTS_EXCEEDED");
 
       private String value;
 
