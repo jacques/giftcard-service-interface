@@ -1,5 +1,12 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v3.14.0
+
+Released 22 May 2019
+
+- Updated the Giftcard Service Interface:
+	- Replaced `FUNCTION_NOT_SUPPORTED_FOR_CARD_RANK` `ErrorType` with FUNCTION_BLOCKED_FOR_CARD_RANK for use when a function is not supported for a specific card rank.
+
 ## v3.13.0
 
 Released 25 March 2019
