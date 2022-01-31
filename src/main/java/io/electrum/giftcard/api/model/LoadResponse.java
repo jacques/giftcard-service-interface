@@ -10,13 +10,11 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Objects;
-
 /**
  * Information about the load made on the gift card.
  */
 @ApiModel(description = "Information about the load made on the gift card.")
-public class LoadResponse extends Transaction implements IGiftCardExtTransaction {
+public class LoadResponse extends Transaction implements IGiftCardExtTransaction{
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
@@ -120,25 +118,6 @@ public class LoadResponse extends Transaction implements IGiftCardExtTransaction
 
    public void setCardHolder(Customer cardHolder) {
       this.cardHolder = cardHolder;
-   }
-
-   @Override
-   public boolean equals(Object o) {
-      if (this == o)
-         return true;
-      if (!(o instanceof LoadResponse))
-         return false;
-      if (!super.equals(o))
-         return false;
-      LoadResponse that = (LoadResponse) o;
-      return Objects.equals(amounts, that.amounts) && Objects.equals(card, that.card)
-            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
-            && Objects.equals(cardHolder, that.cardHolder);
-   }
-
-   @Override
-   public int hashCode() {
-      return Objects.hash(super.hashCode(), amounts, card, posInfo, product, cardHolder);
    }
 
    @Override

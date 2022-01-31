@@ -10,13 +10,11 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.Objects;
-
 /**
  * Information about the void of the gift card.
  */
 @ApiModel(description = "Information about the void of the gift card.")
-public class VoidRequest extends Transaction implements IGiftCardTransaction {
+public class VoidRequest extends Transaction implements IGiftCardTransaction{
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
@@ -101,24 +99,6 @@ public class VoidRequest extends Transaction implements IGiftCardTransaction {
 
    public void setCardHolder(Customer cardHolder) {
       this.cardHolder = cardHolder;
-   }
-
-   @Override
-   public boolean equals(Object o) {
-      if (this == o)
-         return true;
-      if (!(o instanceof VoidRequest))
-         return false;
-      if (!super.equals(o))
-         return false;
-      VoidRequest that = (VoidRequest) o;
-      return Objects.equals(card, that.card) && Objects.equals(posInfo, that.posInfo)
-            && Objects.equals(product, that.product) && Objects.equals(cardHolder, that.cardHolder);
-   }
-
-   @Override
-   public int hashCode() {
-      return Objects.hash(super.hashCode(), card, posInfo, product, cardHolder);
    }
 
    @Override

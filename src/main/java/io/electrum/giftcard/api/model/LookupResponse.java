@@ -13,13 +13,12 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Information about the result of processing the gift card lookup request.
  */
 @ApiModel(description = "Information about the result of processing the gift card lookup request.")
-public class LookupResponse extends Transaction implements IGiftCardExtTransaction {
+public class LookupResponse extends Transaction implements IGiftCardExtTransaction{
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
@@ -192,27 +191,6 @@ public class LookupResponse extends Transaction implements IGiftCardExtTransacti
 
    public void setMarketingAttributes(List<MarketingAttribute> marketingAttributes) {
       this.marketingAttributes = marketingAttributes;
-   }
-
-   @Override
-   public boolean equals(Object o) {
-      if (this == o)
-         return true;
-      if (!(o instanceof LookupResponse))
-         return false;
-      if (!super.equals(o))
-         return false;
-      LookupResponse that = (LookupResponse) o;
-      return Objects.equals(amounts, that.amounts) && Objects.equals(card, that.card)
-            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
-            && Objects.equals(cardHolder, that.cardHolder) && Objects.equals(points, that.points)
-            && Objects.equals(clubs, that.clubs) && Objects.equals(marketingAttributes, that.marketingAttributes);
-   }
-
-   @Override
-   public int hashCode() {
-      return Objects
-            .hash(super.hashCode(), amounts, card, posInfo, product, cardHolder, points, clubs, marketingAttributes);
    }
 
    @Override

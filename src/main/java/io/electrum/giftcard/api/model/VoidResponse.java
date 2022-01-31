@@ -8,8 +8,6 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.Objects;
-
 /**
  * Information about the outcome of voiding process.
  */
@@ -21,6 +19,7 @@ public class VoidResponse extends Transaction implements IGiftCardExtTransaction
    private PosInfo posInfo = null;
    private Product product = null;
    private Customer cardHolder = null;
+
 
    public VoidResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -115,25 +114,6 @@ public class VoidResponse extends Transaction implements IGiftCardExtTransaction
 
    public void setCardHolder(Customer cardHolder) {
       this.cardHolder = cardHolder;
-   }
-
-   @Override
-   public boolean equals(Object o) {
-      if (this == o)
-         return true;
-      if (!(o instanceof VoidResponse))
-         return false;
-      if (!super.equals(o))
-         return false;
-      VoidResponse that = (VoidResponse) o;
-      return Objects.equals(amounts, that.amounts) && Objects.equals(card, that.card)
-            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
-            && Objects.equals(cardHolder, that.cardHolder);
-   }
-
-   @Override
-   public int hashCode() {
-      return Objects.hash(super.hashCode(), amounts, card, posInfo, product, cardHolder);
    }
 
    @Override

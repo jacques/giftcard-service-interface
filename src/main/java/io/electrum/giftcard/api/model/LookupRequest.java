@@ -1,5 +1,6 @@
 package io.electrum.giftcard.api.model;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
@@ -8,13 +9,11 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.Objects;
-
 /**
  * Information about a gift card to be retrieved.
- */
+ */ 
 @ApiModel(description = "Information about a gift card to be retrieved.")
-public class LookupRequest extends Transaction implements IGiftCardTransaction {
+public class LookupRequest extends Transaction implements IGiftCardTransaction{
 
    private Card card = null;
    private PosInfo posInfo = null;
@@ -72,30 +71,12 @@ public class LookupRequest extends Transaction implements IGiftCardTransaction {
       return this;
    }
 
-   public Customer getCardHolder() {
-      return cardHolder;
-   }
-
    public void setCardHolder(Customer cardHolder) {
       this.cardHolder = cardHolder;
    }
 
-   @Override
-   public boolean equals(Object o) {
-      if (this == o)
-         return true;
-      if (!(o instanceof LookupRequest))
-         return false;
-      if (!super.equals(o))
-         return false;
-      LookupRequest that = (LookupRequest) o;
-      return Objects.equals(card, that.card) && Objects.equals(posInfo, that.posInfo)
-            && Objects.equals(cardHolder, that.cardHolder);
-   }
-
-   @Override
-   public int hashCode() {
-      return Objects.hash(super.hashCode(), card, posInfo, cardHolder);
+   public Customer getCardHolder() {
+      return cardHolder;
    }
 
    @Override

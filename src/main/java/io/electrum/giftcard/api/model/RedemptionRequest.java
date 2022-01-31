@@ -11,13 +11,11 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.Objects;
-
 /**
  * Information about the redemption being made on the gift card.
  */
 @ApiModel(description = "Information about the redemption being made on the gift card.")
-public class RedemptionRequest extends Transaction implements IGiftCardExtTransaction {
+public class RedemptionRequest extends Transaction implements IGiftCardExtTransaction{
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
@@ -168,26 +166,6 @@ public class RedemptionRequest extends Transaction implements IGiftCardExtTransa
 
    public void setCardHolder(Customer cardHolder) {
       this.cardHolder = cardHolder;
-   }
-
-   @Override
-   public boolean equals(Object o) {
-      if (this == o)
-         return true;
-      if (!(o instanceof RedemptionRequest))
-         return false;
-      if (!super.equals(o))
-         return false;
-      RedemptionRequest that = (RedemptionRequest) o;
-      return Objects.equals(amounts, that.amounts) && Objects.equals(card, that.card)
-            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
-            && Objects.equals(basket, that.basket) && Objects.equals(points, that.points)
-            && Objects.equals(cardHolder, that.cardHolder);
-   }
-
-   @Override
-   public int hashCode() {
-      return Objects.hash(super.hashCode(), amounts, card, posInfo, product, basket, points, cardHolder);
    }
 
    @Override

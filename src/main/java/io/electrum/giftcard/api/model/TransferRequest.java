@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
 
 /**
  * Information about the transfer being from a source gift card to a target gift card.
@@ -154,25 +153,6 @@ public class TransferRequest extends Transaction implements IGiftCardTargetTrans
 
    public void setCardHolder(Customer cardHolder) {
       this.cardHolder = cardHolder;
-   }
-
-   @Override
-   public boolean equals(Object o) {
-      if (this == o)
-         return true;
-      if (!(o instanceof TransferRequest))
-         return false;
-      if (!super.equals(o))
-         return false;
-      TransferRequest that = (TransferRequest) o;
-      return Objects.equals(amounts, that.amounts) && Objects.equals(sourceCard, that.sourceCard)
-            && Objects.equals(targetCard, that.targetCard) && Objects.equals(posInfo, that.posInfo)
-            && Objects.equals(product, that.product) && Objects.equals(cardHolder, that.cardHolder);
-   }
-
-   @Override
-   public int hashCode() {
-      return Objects.hash(super.hashCode(), amounts, sourceCard, targetCard, posInfo, product, cardHolder);
    }
 
    @Override
