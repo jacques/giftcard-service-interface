@@ -2,10 +2,10 @@ version: 2
 jobs:
   build-and-release:
     docker:
-      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+      - image: ${ARTIFACTORY_DOCKER_URL}/circleci-openjdk
+        auth:
+          username: $ARTIFACTORY_READER_USERNAME
+          password: $ARTIFACTORY_READER_PASSWORD
     steps:
       - setup_remote_docker
       - checkout
@@ -27,9 +27,6 @@ jobs:
       - run:
           name: Compile, Test, and Release
           command: /electrum/bin/simpleTestAndReleaseJava.sh
-      - run:
-          name: Deploy docs to Github Pages
-          command: /electrum/bin/deployGithubPages.sh ~/project/target/devguide/site
       - run:
           name: Release failed! Revert any release steps that might have been taken
           command: /electrum/bin/revertReleaseJava.sh
@@ -54,12 +51,16 @@ jobs:
           destination: release
   code-coverage-report:
     docker:
-      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+      - image: ${ARTIFACTORY_DOCKER_URL}/circleci-openjdk
+        auth:
+          username: $ARTIFACTORY_READER_USERNAME
+          password: $ARTIFACTORY_READER_PASSWORD
     steps:
+      - setup_remote_docker
       - checkout
+      - run:
+          name: Sonar Checkout
+          command: /electrum/bin/sonarCheckout.sh
       - restore_cache:
           # if you ever need to invalidate the cache, simply bump the version number
           keys:
@@ -67,16 +68,19 @@ jobs:
             - v1-maven-{{ .Branch }}
       - run:
           name: Generate code coverage report
-          command: mvn cobertura:cobertura -B -Dstyle.color=always
+          command: /electrum/bin/codeCoverageJacoco.sh
+      - run:
+          name: Push to SonarQube
+          command: /electrum/bin/runSonar.sh
       - store_artifacts:
-          path: target/site/cobertura
+          path: target/site
           destination: coverage
   build-with-latest-deps:
     docker:
-      - image: 813968012009.dkr.ecr.us-east-1.amazonaws.com/circleci-openjdk8-8u162
-        aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+      - image: ${ARTIFACTORY_DOCKER_URL}/circleci-openjdk
+        auth:
+          username: $ARTIFACTORY_READER_USERNAME
+          password: $ARTIFACTORY_READER_PASSWORD
     steps:
       - setup_remote_docker
       - checkout
@@ -119,6 +123,8 @@ workflows:
           context: java
       - code-coverage-report:
           context: java
+          requires:
+            - build-and-release
   nightly:
     jobs:
       - build-with-latest-deps:
