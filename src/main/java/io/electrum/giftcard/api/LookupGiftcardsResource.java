@@ -70,7 +70,10 @@ public abstract class LookupGiftcardsResource {
             httpServletRequest);
    }
 
-   public class Operations{
+   public static class Operations{
         public static final String LOOKUP_GIFTCARD = "lookupGiftcard";
-    }
+
+      private Operations() {
+      }
+   }
 }

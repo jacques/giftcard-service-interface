@@ -145,10 +145,13 @@ public abstract class TransfersResource {
             httpServletRequest);
    }
 
-   public class Operations {
+   public static class Operations {
       public static final String CONFIRM_TRANSFER = "confirmTransfer";
       public static final String TRANSFER = "transfer";
       public static final String REVERSE_TRANSFER = "reverseTransfer";
+
+      private Operations() {
+      }
    }
 
 }

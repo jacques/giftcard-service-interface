@@ -10,6 +10,8 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.Objects;
+
 /**
  * Information about the result of processing the card activation.
  */
@@ -121,6 +123,25 @@ public class ActivationResponse extends Transaction implements IGiftCardExtTrans
 
    public void setProduct(Product product) {
       this.product = product;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (!(o instanceof ActivationResponse))
+         return false;
+      if (!super.equals(o))
+         return false;
+      ActivationResponse that = (ActivationResponse) o;
+      return Objects.equals(amounts, that.amounts) && Objects.equals(card, that.card)
+            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
+            && Objects.equals(cardHolder, that.cardHolder);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), amounts, card, posInfo, product, cardHolder);
    }
 
    @Override

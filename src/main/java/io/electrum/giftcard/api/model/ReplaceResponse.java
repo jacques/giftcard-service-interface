@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Information about the replace request made to switch an old card with a new card.
@@ -143,6 +144,25 @@ public class ReplaceResponse extends Transaction implements IGiftCardTargetTrans
 
    public void setCardHolder(Customer cardHolder) {
       this.cardHolder = cardHolder;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (!(o instanceof ReplaceResponse))
+         return false;
+      if (!super.equals(o))
+         return false;
+      ReplaceResponse that = (ReplaceResponse) o;
+      return Objects.equals(amounts, that.amounts) && Objects.equals(oldCard, that.oldCard)
+            && Objects.equals(newCard, that.newCard) && Objects.equals(posInfo, that.posInfo)
+            && Objects.equals(product, that.product) && Objects.equals(cardHolder, that.cardHolder);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), amounts, oldCard, newCard, posInfo, product, cardHolder);
    }
 
    @Override

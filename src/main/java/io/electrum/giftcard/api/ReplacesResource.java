@@ -150,10 +150,13 @@ public abstract class ReplacesResource {
             httpServletRequest);
    }
 
-   public class Operations {
+   public static class Operations {
       public static final String CONFIRM_REPLACE = "confirmReplace";
       public static final String REPLACE = "replace";
       public static final String REVERSE_REPLACE = "reverseReplace";
+
+      private Operations() {
+      }
    }
 
 }

@@ -145,9 +145,12 @@ public abstract class VoidsResource {
             httpServletRequest);
    }
 
-   public class Operations {
+   public static class Operations {
         public static final String CONFIRM_VOID = "confirmVoid";
         public static final String VOID = "void";
         public static final String REVERSE_VOID = "reverseVoid";
-    }
+
+      private Operations() {
+      }
+   }
 }

@@ -1,7 +1,12 @@
 package io.electrum.giftcard.api;
 
 public class GiftcardApi {
-   public class PathParams {
+
+   private GiftcardApi() {
+
+   }
+
+   public static class PathParams {
       // The general path parameters
       public static final String REVERSAL_ID = "reversalId";
       public static final String CONFIRMATION_ID = "confirmationId";
@@ -15,69 +20,106 @@ public class GiftcardApi {
       public static final String TRANSFER_ID = "transferId";
       public static final String VOID_ID = "voidId";
 
+      private PathParams() {
+
+      }
    }
 
-   public class Paths {
+   public static class Paths {
       public static final String VERSION_NO = "/v3";
       public static final String BASE_PATH = "/giftcard" + VERSION_NO;
       public static final String REVERSALS = "/reversals";
       public static final String CONFIRMATIONS = "/confirmations";
+      private Paths() {
+      }
 
-      public class ActivationPaths {
+      public static class ActivationPaths {
          public static final String ACTIVATION_BASE_PATH = "/activations";
          public static final String ACTIVATION_REQUEST = ACTIVATION_BASE_PATH + "/{" + PathParams.ACTIVATION_ID + "}";
          public static final String ACTIVATION_CONFIRMATION =
                ACTIVATION_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
          public static final String ACTIVATION_REVERSAL =
                ACTIVATION_REQUEST + REVERSALS + "/{" + PathParams.REVERSAL_ID + "}";
+
+         private ActivationPaths() {
+         }
       }
 
-      public class LoadPaths {
+      public static class LoadPaths {
          public static final String LOAD_BASE_PATH = "/loads";
-         public static final String LOAD_REQUEST = LOAD_BASE_PATH + "/{" + PathParams.LOAD_ID+ "}";
-         public static final String LOAD_CONFIRMATION = LOAD_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
+         public static final String LOAD_REQUEST = LOAD_BASE_PATH + "/{" + PathParams.LOAD_ID + "}";
+         public static final String LOAD_CONFIRMATION =
+               LOAD_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
          public static final String LOAD_REVERSAL = LOAD_REQUEST + REVERSALS + "/{" + PathParams.REVERSAL_ID + "}";
+
+         private LoadPaths() {
+         }
       }
 
-      public class LookupPaths {
+      public static class LookupPaths {
          public static final String LOOKUP_BASE_PATH = "/lookupGiftcard";
          public static final String LOOKUP_REQUEST = LOOKUP_BASE_PATH + "/{" + PathParams.LOOKUP_ID + "}";
+
+         private LookupPaths() {
+         }
       }
 
-      public class RedemptionPaths {
+      public static class RedemptionPaths {
          public static final String REDEMPTION_BASE_PATH = "/redemptions";
-         public static final String REDEMPTION_REQUEST = REDEMPTION_BASE_PATH + "/{" + PathParams.REDEMPTION_ID+ "}";
-         public static final String REDEMPTION_CONFIRMATION = REDEMPTION_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
-         public static final String REDEMPTION_REVERSAL = REDEMPTION_REQUEST + REVERSALS + "/{" + PathParams.REVERSAL_ID + "}";
+         public static final String REDEMPTION_REQUEST = REDEMPTION_BASE_PATH + "/{" + PathParams.REDEMPTION_ID + "}";
+         public static final String REDEMPTION_CONFIRMATION =
+               REDEMPTION_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
+         public static final String REDEMPTION_REVERSAL =
+               REDEMPTION_REQUEST + REVERSALS + "/{" + PathParams.REVERSAL_ID + "}";
+
+         private RedemptionPaths() {
+         }
       }
 
-      public class ReplacePaths {
+      public static class ReplacePaths {
          public static final String REPLACE_BASE_PATH = "/replaces";
-         public static final String REPLACE_REQUEST = REPLACE_BASE_PATH + "/{" + PathParams.REPLACE_ID+ "}";
-         public static final String REPLACE_CONFIRMATION = REPLACE_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
-         public static final String REPLACE_REVERSAL = REPLACE_REQUEST + REVERSALS + "/{" + PathParams.REVERSAL_ID + "}";
+         public static final String REPLACE_REQUEST = REPLACE_BASE_PATH + "/{" + PathParams.REPLACE_ID + "}";
+         public static final String REPLACE_CONFIRMATION =
+               REPLACE_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
+         public static final String REPLACE_REVERSAL =
+               REPLACE_REQUEST + REVERSALS + "/{" + PathParams.REVERSAL_ID + "}";
+
+         private ReplacePaths() {
+         }
       }
 
-      public class TransferPaths {
+      public static class TransferPaths {
          public static final String TRANSFER_BASE_PATH = "/transfers";
-         public static final String TRANSFER_REQUEST = TRANSFER_BASE_PATH +  "/{" + PathParams.TRANSFER_ID+ "}";
-         public static final String TRANSFER_CONFIRMATION = TRANSFER_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
-         public static final String TRANSFER_REVERSAL = TRANSFER_REQUEST + REVERSALS + "/{" + PathParams.REVERSAL_ID + "}";
+         public static final String TRANSFER_REQUEST = TRANSFER_BASE_PATH + "/{" + PathParams.TRANSFER_ID + "}";
+         public static final String TRANSFER_CONFIRMATION =
+               TRANSFER_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
+         public static final String TRANSFER_REVERSAL =
+               TRANSFER_REQUEST + REVERSALS + "/{" + PathParams.REVERSAL_ID + "}";
+
+         private TransferPaths() {
+         }
       }
 
-      public class VoidPaths {
+      public static class VoidPaths {
          public static final String VOID_BASE_PATH = "/voids";
-         public static final String VOID_REQUEST = VOID_BASE_PATH + "/{" + PathParams.VOID_ID+ "}";
-         public static final String VOID_CONFIRMATION = VOID_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
+         public static final String VOID_REQUEST = VOID_BASE_PATH + "/{" + PathParams.VOID_ID + "}";
+         public static final String VOID_CONFIRMATION =
+               VOID_REQUEST + CONFIRMATIONS + "/{" + PathParams.CONFIRMATION_ID + "}";
          public static final String VOID_REVERSAL = VOID_REQUEST + REVERSALS + "/{" + PathParams.REVERSAL_ID + "}";
+
+         private VoidPaths() {
+         }
       }
    }
 
-   public class HttpAuthorizations {
+   public static class HttpAuthorizations {
       public static final String HTTP_BASIC = "httpBasic";
+
+      private HttpAuthorizations() {
+      }
    }
 
-   public class ResponseCodes {
+   public static class ResponseCodes {
       public static final int CREATED = 201;
       public static final int ACCEPTED = 202;
       public static final int BAD_REQUEST = 400;
@@ -85,9 +127,12 @@ public class GiftcardApi {
       public static final int INTERNAL_SERVER_ERROR = 500;
       public static final int SERVICE_UNAVAILABLE = 503;
       public static final int GATEWAY_TIMEOUT = 504;
+
+      private ResponseCodes() {
+      }
    }
 
-   public class ResponseMessages {
+   public static class ResponseMessages {
       public static final String CREATED = "Created";
       public static final String ACCEPTED = "Accepted";
       public static final String BAD_REQUEST = "Bad Request";
@@ -95,5 +140,8 @@ public class GiftcardApi {
       public static final String INTERNAL_SERVER_ERROR = "Internal Server Error";
       public static final String SERVICE_UNAVAILABLE = "Service Unavailable";
       public static final String GATEWAY_TIMEOUT = "Gateway Timeout";
+
+      private ResponseMessages() {
+      }
    }
 }
