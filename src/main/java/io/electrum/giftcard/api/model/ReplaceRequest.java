@@ -2,22 +2,26 @@ package io.electrum.giftcard.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
- * Information about the replace request to switch an old card with a new card (Transfer funds out of and void old card).
+ * Information about the replace request to switch an old card with a new card (Transfer funds out of and void old
+ * card).
  */
 @ApiModel(description = "Information about the replace request to switch an old card with a new card (Transfer funds out of and void old card).")
-public class ReplaceRequest extends Transaction {
+public class ReplaceRequest extends Transaction implements IGiftCardTargetTransaction {
 
    private Card oldCard = null;
    private Card newCard = null;
    private PosInfo posInfo = null;
    private Product product = null;
+   private Customer cardHolder = null;
 
    public ReplaceRequest oldCard(Card oldCard) {
       this.oldCard = oldCard;
@@ -66,6 +70,16 @@ public class ReplaceRequest extends Transaction {
       return this;
    }
 
+   @Override
+   public Card getCard() {
+      return getOldCard();
+   }
+
+   @Override
+   public void setCard(Card card) {
+      setOldCard(card);
+   }
+
    /**
     * Information about the POS.
     *
@@ -101,6 +115,45 @@ public class ReplaceRequest extends Transaction {
       this.product = product;
    }
 
+   public ReplaceRequest cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   /**
+    * Information about the card holder.
+    * 
+    * @return cardHolder
+    **/
+   @ApiModelProperty(value = "Information about the card holder.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (!(o instanceof ReplaceRequest))
+         return false;
+      if (!super.equals(o))
+         return false;
+      ReplaceRequest that = (ReplaceRequest) o;
+      return Objects.equals(oldCard, that.oldCard) && Objects.equals(newCard, that.newCard)
+            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
+            && Objects.equals(cardHolder, that.cardHolder);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), oldCard, newCard, posInfo, product, cardHolder);
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -119,8 +172,18 @@ public class ReplaceRequest extends Transaction {
       sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
       sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
       sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
+      sb.append("    customer: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }
 
+   @Override
+   public Card getTargetCard() {
+      return getNewCard();
+   }
+
+   @Override
+   public void setTargetCard(Card targetCard) {
+      setNewCard(targetCard);
+   }
 }

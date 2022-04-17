@@ -1,27 +1,31 @@
 package io.electrum.giftcard.api.model;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.vas.Utils;
-import io.electrum.vas.model.TranType;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
 
 /**
  * Information about the redemption made on the gift card.
  */
 @ApiModel(description = "Information about the redemption made on the gift card.")
-public class RedemptionResponse extends Transaction {
+public class RedemptionResponse extends Transaction implements IGiftCardExtTransaction {
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
    private Basket basket = null;
-   private SlipData slipData = null;
+   private PointAmounts points = null;
+   private Customer cardHolder = null;
 
    public RedemptionResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -120,6 +124,67 @@ public class RedemptionResponse extends Transaction {
       this.basket = basket;
    }
 
+   public RedemptionResponse points(PointAmounts points) {
+      this.points = points;
+      return this;
+   }
+
+   /**
+    * Specifies the points amount for the account the giftcard is associated with.
+    *
+    * @return points
+    **/
+   @ApiModelProperty(value = "Specifies the points amount for the account the giftcard is associated with.")
+   @JsonProperty("points")
+   @Valid
+   public PointAmounts getPoints() {
+      return points;
+   }
+
+   public void setPoints(PointAmounts points) {
+      this.points = points;
+   }
+
+   public RedemptionResponse cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   /**
+    * Information about the card holder.
+    * 
+    * @return cardHolder
+    **/
+   @ApiModelProperty(value = "Information about the card holder.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (!(o instanceof RedemptionResponse))
+         return false;
+      if (!super.equals(o))
+         return false;
+      RedemptionResponse that = (RedemptionResponse) o;
+      return Objects.equals(amounts, that.amounts) && Objects.equals(card, that.card)
+            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
+            && Objects.equals(basket, that.basket) && Objects.equals(points, that.points)
+            && Objects.equals(cardHolder, that.cardHolder);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), amounts, card, posInfo, product, basket, points, cardHolder);
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -140,6 +205,8 @@ public class RedemptionResponse extends Transaction {
       sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
       sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
       sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
+      sb.append("    points: ").append(Utils.toIndentedString(points)).append("\n");
+      sb.append("    customer: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }

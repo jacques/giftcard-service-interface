@@ -2,24 +2,26 @@ package io.electrum.giftcard.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Information about the transfer made from a source gift card to a target gift card.
  */
 @ApiModel(description = "Information about the transfer made from a source gift card to a target gift card.")
-public class TransferResponse extends Transaction {
+public class TransferResponse extends Transaction implements IGiftCardTargetTransaction {
 
    private GiftcardAmounts amounts = null;
    private Card sourceCard = null;
    private Card targetCard = null;
    private PosInfo posInfo = null;
    private Product product = null;
-   private SlipData slipData = null;
+   private Customer cardHolder = null;
 
    public TransferResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -80,6 +82,16 @@ public class TransferResponse extends Transaction {
       return this;
    }
 
+   @Override
+   public Card getCard() {
+      return getSourceCard();
+   }
+
+   @Override
+   public void setCard(Card card) {
+      setSourceCard(card);
+   }
+
    /**
     * Information about the POS.
     *
@@ -115,6 +127,45 @@ public class TransferResponse extends Transaction {
       this.product = product;
    }
 
+   public TransferResponse cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   /**
+    * Information about the card holder.
+    * 
+    * @return cardHolder
+    **/
+   @ApiModelProperty(value = "Information about the card holder.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (!(o instanceof TransferResponse))
+         return false;
+      if (!super.equals(o))
+         return false;
+      TransferResponse that = (TransferResponse) o;
+      return Objects.equals(amounts, that.amounts) && Objects.equals(sourceCard, that.sourceCard)
+            && Objects.equals(targetCard, that.targetCard) && Objects.equals(posInfo, that.posInfo)
+            && Objects.equals(product, that.product) && Objects.equals(cardHolder, that.cardHolder);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), amounts, sourceCard, targetCard, posInfo, product, cardHolder);
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -135,6 +186,7 @@ public class TransferResponse extends Transaction {
       sb.append("    tranType: ").append(Utils.toIndentedString(tranType)).append("\n");
       sb.append("    srcAccType: ").append(Utils.toIndentedString(srcAccType)).append("\n");
       sb.append("    destAccType: ").append(Utils.toIndentedString(destAccType)).append("\n");
+      sb.append("    customer: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }

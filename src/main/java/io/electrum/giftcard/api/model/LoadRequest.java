@@ -5,20 +5,24 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.Objects;
 
 /**
  * Information about the load being made on the gift card.
  */
 @ApiModel(description = "Information about the load being made on the gift card.")
-public class LoadRequest extends Transaction {
+public class LoadRequest extends Transaction implements IGiftCardExtTransaction {
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
+   private Customer cardHolder = null;
 
    public LoadRequest amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -102,6 +106,45 @@ public class LoadRequest extends Transaction {
       this.product = product;
    }
 
+   public LoadRequest cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   /**
+    * Information about the card holder.
+    * 
+    * @return cardHolder
+    **/
+   @ApiModelProperty(value = "Information about the card holder.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (!(o instanceof LoadRequest))
+         return false;
+      if (!super.equals(o))
+         return false;
+      LoadRequest that = (LoadRequest) o;
+      return Objects.equals(amounts, that.amounts) && Objects.equals(card, that.card)
+            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
+            && Objects.equals(cardHolder, that.cardHolder);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), amounts, card, posInfo, product, cardHolder);
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -118,6 +161,7 @@ public class LoadRequest extends Transaction {
       sb.append("    card: ").append(Utils.toIndentedString(card)).append("\n");
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    product: ").append(Utils.toIndentedString(product)).append("\n");
+      sb.append("    customer: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }

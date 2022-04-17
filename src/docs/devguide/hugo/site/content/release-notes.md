@@ -1,5 +1,147 @@
 This page describes changes to the Giftcard Service Interface implemented across different releases of the interface.
 
+## v4.0.0
+
+Released 13 April 2022
+
+- Added `equals` and `hashcode` methods to some model classes that didn't have them
+- Updated base API dependency to v3.38.0:
+    - Added `equals` and `hashcode` methods to classes that erroneously didn't have them.
+- Removed the following dependencies as they are not required:
+    - `joda-time:joda-time`
+    - `io.swagger:swagger-jersey2-jaxrs`
+    - `io.swagger:swagger-hibernate-validations`
+    - `org.eclipse.jetty:jetty-server`
+    - `org.glassfish.jersey.core:jersey-server`
+    - `org.glassfish.jersey.core:jersey-common`
+    - `org.glassfish.jersey.containers:jersey-container-servlet`
+    - `org.glassfish.jersey.core:jersey-client`
+    - `org.glassfish.jersey.media:jersey-media-json-jackson`
+    - `org.hibernate:hibernate-validator`
+    - `javax.el:javax.el-api`
+    - `org.glassfish.web:javax.el`
+    - `org.slf4j:slf4j-api`
+
+## v3.15.0
+
+Released 23 July 2019
+
+- Updated base API dependency to v3.21.0:
+    - Added new field `emailAddress` to `Customer` model.
+
+## v3.14.0
+
+Released 22 May 2019
+
+- Updated the Giftcard Service Interface:
+    - Replaced `FUNCTION_NOT_SUPPORTED_FOR_CARD_RANK` `ErrorType` with FUNCTION_BLOCKED_FOR_CARD_RANK for use when a
+      function is not supported for a specific card rank.
+
+## v3.13.0
+
+Released 25 March 2019
+
+- Updated the Giftcard Service Interface:
+    - Added `CARD_BLOCKED` `ErrorType` for use when the card has been blocked.
+    - Added `CARD_DELETED` `ErrorType` for use when the card has been deleted.
+    - Added `FUNCTION_NOT_SUPPORTED_FOR_CARD_RANK` `ErrorType` for use when a function is not supported for a specific
+      card rank.
+
+## v3.12.0
+
+Released 12 March 2019
+
+- Updated base API dependency to v3.19.0:
+    - Added explicit fields for STAN and RRN values to `BasicAdvice` and `Transaction` models.
+    - Added `ExchangeRate` to describe the exchange rate between two currencies
+    - Added `Account` to describe more varied accounts in a consistent manner. This has the following sub-types defined:
+    - The limitations on the `id` field of the `Institution` model have been removed to make the field suitable for a
+      wider range of applications.
+    - Added `Pin` base model with `PinClear` to describe PINs in the clear and `PinEncrypted` to describe encrypted
+      PINs.
+    - `Pin` was added to `CardPayment`, taking precedence over the existing `encyptedPin` field
+- Added a `PIN_ATTEMPTS_EXCEEDED` `ErrorType` for uses when a transaction is declined due to previous incorrect pin
+  response exceeding a limit.
+- Added a `Pin` to `Card` for better handling of clear and encrypted pins.
+
+## v3.11.0
+
+Released 25 February 2019
+
+- Added a `DO_NOT_HONOUR` `ErrorType` for uses when a transaction is intentionally declined without further
+  information (e.g. due to an unspecified security violation).
+
+## v3.10.0
+
+Released 12 November 2018
+
+- Added `cardHolder` field to `LookupRequest` which contains a `Customer` object. As part of this change, the `card`
+  field is no longer mandatory, but one of either `card` or `cardHolder` should be set.
+- Less restrictive validation on the `type` field of the `Product` definition: the `type` string may now contain any
+  characters and be up to 50 characters long.
+
+## v3.9.0
+
+Released 24 October 2018
+
+- Added `PosConditionCode` enumeration to the `PosInfo` model defined in the Giftcard Service Interface.
+    - Giftcard Service Interface v3.8.0 added a similar `posConditionCode` to the `PosInfo` model defined in v3.16.0 of
+      the base API.
+
+## v3.8.0
+
+Released 23 October 2018
+
+- Updated base API dependency to v3.16.0:
+    - Added an `msisdn` field to the `Customer` model to carry the customer's cellphone number.
+    - Added a `PosInfo` model to capture POS information this also contains the following sub-fields:
+        - a `PosEntryMode` model which defines how PAN and PIN information was captured,
+        - a `PosConditionCode` enumeration which indicates the POS circumstances of the transaction.
+    - Added a new `PaymentMethod` called `Card` for card based payments.
+- Added a `cardHolder` field of type `Customer` to the following request and response messages:
+    - `LoadRequest`
+    - `LoadResponse`
+    - `RedemptionRequest`
+    - `RedemptionResponse`
+    - `ReplaceRequest`
+    - `ReplaceResponse`
+    - `TransferRequest`
+    - `TransferResponse`
+    - `VoidRequest`
+    - `VoidResponse`
+
+## v3.7.0
+
+Released 14 September 2018
+
+- MarketingAttribute Entity:
+    - Making the member, marketToCustomer field required
+    - Making the member, marketToCustomer field default to false
+
+## v3.6.0
+
+Released 30 August 2018
+
+- Added new MarketingAttribute entity to model
+- Added list of MarketingAttributes to LookupResponse
+
+## v3.5.0
+
+Released 23 August 2018
+
+- Added new Club entity to model
+- Added a PointsAmount entity to describe relevant information about points in a transaction.
+- Added a PointAmounts entity to hold relevant point amounts in a transaction.
+- Added optional rank field to Card entity.
+- Added optional points (PointAmounts)  and clubs fields to the LookupResponse.
+- Added points (PointAmounts) field to the RedemptionRequest and RedemptionResponse.
+
+## v3.4.0
+
+Released 23 July 2018
+
+- Added optional cardHolder field to LookupResponse, ActivationRequest and Activation Response.
+
 ## v3.3.2
 
 Released 6 July 2018
@@ -23,12 +165,13 @@ Released 09 February 2018
 - Update ErrorDetail RequestTypes with new Replace and Transfer request operations
 - Updated giftcard-service-interface to latest service-base-interface (version 3.6.0)
     - Updated GiftcardAmounts toString() method to include the additionalAmounts field
- 
+
 ## v3.2.0
 
 Released 22 January 2018
 
-- Updated Giftcard Service Interface to make use of base interface v3.5.0 to include new TranTypes and AccountTypes for Transactions.
+- Updated Giftcard Service Interface to make use of base interface v3.5.0 to include new TranTypes and AccountTypes for
+  Transactions.
 
 ## v3.1.0
 
@@ -47,8 +190,12 @@ Released 06 March 2017
 
 Released 06 March 2017
 
-- Updated Giftcard Service Interface abstract resource classes. The classes were changed to pass all parameters to the User's custom resource implementation, as opposed to resuming the AsyncResponse from within the resource. The User should now call resume on the AsyncResponse. This allows for more flexibility, proper asynchronicity and allows the user to choose their own threading model.
-- Added Jax RS Core Request to the expected parameters from @Context. This is passed through as above with the rest of the parameters.
+- Updated Giftcard Service Interface abstract resource classes. The classes were changed to pass all parameters to the
+  User's custom resource implementation, as opposed to resuming the AsyncResponse from within the resource. The User
+  should now call resume on the AsyncResponse. This allows for more flexibility, proper asynchronicity and allows the
+  user to choose their own threading model.
+- Added Jax RS Core Request to the expected parameters from @Context. This is passed through as above with the rest of
+  the parameters.
 
 ## v3.0.1
 
@@ -61,9 +208,9 @@ Released 31 October 2016
 Released 26 October 2016
 
 - Aligned Giftcard Service Interface with base service interface (v3.0.0).
-  - SlipData moved to basic service interface
-  - Defined BasicAdviceResponse returned when acknowledging an advice.
-  - Added request IDs and request type to ErrorDetail responses.
+    - SlipData moved to basic service interface
+    - Defined BasicAdviceResponse returned when acknowledging an advice.
+    - Added request IDs and request type to ErrorDetail responses.
 
 ## v2.1.0
 
@@ -75,7 +222,8 @@ Released 23 September 2016
 
 Released 15 September 2016
 
-- Gift card look ups have been made HTTP POST operations containing a LookupRequest in the body. This aligns gift card look up operations with other gift card operations.
+- Gift card look ups have been made HTTP POST operations containing a LookupRequest in the body. This aligns gift card
+  look up operations with other gift card operations.
 - The original request has been removed from the subsequent advice messages (confirmations and reversals)
 - Card and Product fields of Activation Responses made mandatory.
 - Card field of Void Requests and Void Responses made mandatory.

@@ -1,25 +1,34 @@
 package io.electrum.giftcard.api.model;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Information about the result of processing the gift card lookup request.
  */
 @ApiModel(description = "Information about the result of processing the gift card lookup request.")
-public class LookupResponse extends Transaction {
+public class LookupResponse extends Transaction implements IGiftCardExtTransaction {
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
-   private SlipData slipData = null;
+   private Customer cardHolder = null;
+   private PointAmounts points = null;
+   private List<Club> clubs = new ArrayList<>();
+   private List<MarketingAttribute> marketingAttributes = new ArrayList<>();
 
    public LookupResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -27,8 +36,26 @@ public class LookupResponse extends Transaction {
    }
 
    /**
+    * Information about the card holder of the gift card.
+    */
+   @ApiModelProperty(value = "Information about the card holder of the gift card.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
+   public LookupResponse cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   /**
     * Indicates the balance of the gift card at the time of the request.
-    * 
+    *
     * @return amounts
     **/
    @ApiModelProperty(required = true, value = "Indicates the balance of the gift card at the time of the request.")
@@ -44,7 +71,7 @@ public class LookupResponse extends Transaction {
 
    /**
     * Information about the gift card for which information is being requested.
-    * 
+    *
     * @return card
     **/
    @ApiModelProperty(required = true, value = "Information about the gift card for which information is being requested.")
@@ -58,6 +85,11 @@ public class LookupResponse extends Transaction {
       this.card = card;
    }
 
+   public LookupResponse card(Card card) {
+      this.card = card;
+      return this;
+   }
+
    public LookupResponse posInfo(PosInfo posInfo) {
       this.posInfo = posInfo;
       return this;
@@ -65,7 +97,7 @@ public class LookupResponse extends Transaction {
 
    /**
     * Information about how card details were captured at the POS.
-    * 
+    *
     * @return posInfo
     **/
    @ApiModelProperty(required = true, value = "Information about how card details were captured at the POS.")
@@ -86,7 +118,7 @@ public class LookupResponse extends Transaction {
 
    /**
     * Information about the product associated with the gift card if the gift card has been activated.
-    * 
+    *
     * @return product
     **/
    @ApiModelProperty(value = "Information about the product associated with the gift card if the gift card has been activated.")
@@ -97,6 +129,90 @@ public class LookupResponse extends Transaction {
 
    public void setProduct(Product product) {
       this.product = product;
+   }
+
+   public LookupResponse points(PointAmounts points) {
+      this.points = points;
+      return this;
+   }
+
+   /**
+    * Information on points associated with this card. For example: balance, currency value.
+    *
+    * @return points
+    **/
+   @ApiModelProperty(value = "Information on points associated with this card. For example: balance, currency value.")
+   @JsonProperty("points")
+   @Valid
+   public PointAmounts getPoints() {
+      return points;
+   }
+
+   public void setPoints(PointAmounts points) {
+      this.points = points;
+   }
+
+   public LookupResponse clubs(List<Club> clubs) {
+      this.clubs = clubs;
+      return this;
+   }
+
+   /**
+    * The clubs associated with this card.
+    *
+    * @return clubs
+    **/
+   @ApiModelProperty(value = "The clubs associated with this card.")
+   @JsonProperty("clubs")
+   @Valid
+   public List<Club> getClubs() {
+      return clubs;
+   }
+
+   public void setClubs(List<Club> clubs) {
+      this.clubs = clubs;
+   }
+
+   public LookupResponse marketingAttributes(List<MarketingAttribute> marketingAttributes) {
+      this.marketingAttributes = marketingAttributes;
+      return this;
+   }
+
+   /**
+    * The marketing attributes associated with this card.
+    *
+    * @return list of marketing attributes
+    **/
+   @ApiModelProperty(value = "The marketing attributes associated with this card.")
+   @JsonProperty("marketingAttributes")
+   @Valid
+   public List<MarketingAttribute> getMarketingAttributes() {
+      return marketingAttributes;
+   }
+
+   public void setMarketingAttributes(List<MarketingAttribute> marketingAttributes) {
+      this.marketingAttributes = marketingAttributes;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (!(o instanceof LookupResponse))
+         return false;
+      if (!super.equals(o))
+         return false;
+      LookupResponse that = (LookupResponse) o;
+      return Objects.equals(amounts, that.amounts) && Objects.equals(card, that.card)
+            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
+            && Objects.equals(cardHolder, that.cardHolder) && Objects.equals(points, that.points)
+            && Objects.equals(clubs, that.clubs) && Objects.equals(marketingAttributes, that.marketingAttributes);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects
+            .hash(super.hashCode(), amounts, card, posInfo, product, cardHolder, points, clubs, marketingAttributes);
    }
 
    @Override
@@ -116,6 +232,10 @@ public class LookupResponse extends Transaction {
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    product: ").append(Utils.toIndentedString(product)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
+      sb.append("    cardHolder: ").append(Utils.toIndentedString(cardHolder)).append("\n");
+      sb.append("    points: ").append(Utils.toIndentedString(points)).append("\n");
+      sb.append("    clubs: ").append(Utils.toIndentedString(clubs)).append("\n");
+      sb.append("    marketingAttributes: ").append(Utils.toIndentedString(marketingAttributes)).append("\n");
       sb.append("}");
       return sb.toString();
    }

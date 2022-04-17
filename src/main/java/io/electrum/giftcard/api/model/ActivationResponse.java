@@ -1,27 +1,49 @@
 package io.electrum.giftcard.api.model;
 
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
 
 /**
  * Information about the result of processing the card activation.
  */
 @ApiModel(description = "Information about the result of processing the card activation.")
-public class ActivationResponse extends Transaction {
+public class ActivationResponse extends Transaction implements IGiftCardExtTransaction {
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
+   private Customer cardHolder = null;
 
    public ActivationResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
+      return this;
+   }
+
+   /**
+    * Information about the card holder of the gift card.
+    */
+   @ApiModelProperty(value = "Information about the card holder of the gift card.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
+   public ActivationResponse cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
       return this;
    }
 
@@ -104,6 +126,25 @@ public class ActivationResponse extends Transaction {
    }
 
    @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (!(o instanceof ActivationResponse))
+         return false;
+      if (!super.equals(o))
+         return false;
+      ActivationResponse that = (ActivationResponse) o;
+      return Objects.equals(amounts, that.amounts) && Objects.equals(card, that.card)
+            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
+            && Objects.equals(cardHolder, that.cardHolder);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), amounts, card, posInfo, product, cardHolder);
+   }
+
+   @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
       sb.append("class ActivationResponse {\n");
@@ -120,6 +161,7 @@ public class ActivationResponse extends Transaction {
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    product: ").append(Utils.toIndentedString(product)).append("\n");
       sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
+      sb.append("    cardHolder: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }

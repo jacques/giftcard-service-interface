@@ -1,23 +1,26 @@
 package io.electrum.giftcard.api.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.vas.Utils;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
 
 /**
  * Information about the outcome of voiding process.
  */
 @ApiModel(description = "Information about the outcome of voiding process.")
-public class VoidResponse extends Transaction {
+public class VoidResponse extends Transaction implements IGiftCardExtTransaction {
 
    private GiftcardAmounts amounts = null;
    private Card card = null;
    private PosInfo posInfo = null;
    private Product product = null;
-   private SlipData slipData = null;
+   private Customer cardHolder = null;
 
    public VoidResponse amounts(GiftcardAmounts amounts) {
       this.amounts = amounts;
@@ -94,6 +97,45 @@ public class VoidResponse extends Transaction {
       this.product = product;
    }
 
+   public VoidResponse cardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+      return this;
+   }
+
+   /**
+    * Information about the card holder.
+    * 
+    * @return cardHolder
+    **/
+   @ApiModelProperty(value = "Information about the card holder.")
+   @JsonProperty("cardHolder")
+   public Customer getCardHolder() {
+      return cardHolder;
+   }
+
+   public void setCardHolder(Customer cardHolder) {
+      this.cardHolder = cardHolder;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (!(o instanceof VoidResponse))
+         return false;
+      if (!super.equals(o))
+         return false;
+      VoidResponse that = (VoidResponse) o;
+      return Objects.equals(amounts, that.amounts) && Objects.equals(card, that.card)
+            && Objects.equals(posInfo, that.posInfo) && Objects.equals(product, that.product)
+            && Objects.equals(cardHolder, that.cardHolder);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), amounts, card, posInfo, product, cardHolder);
+   }
+
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -110,7 +152,8 @@ public class VoidResponse extends Transaction {
       sb.append("    card: ").append(Utils.toIndentedString(card)).append("\n");
       sb.append("    posInfo: ").append(Utils.toIndentedString(posInfo)).append("\n");
       sb.append("    product: ").append(Utils.toIndentedString(product)).append("\n");
-      sb.append("    slipData: ").append(Utils.toIndentedString(slipData)).append("\n");
+      sb.append("    slipData: ").append(Utils.toIndentedString(super.slipData)).append("\n");
+      sb.append("    customer: ").append(Utils.toIndentedString(cardHolder)).append("\n");
       sb.append("}");
       return sb.toString();
    }

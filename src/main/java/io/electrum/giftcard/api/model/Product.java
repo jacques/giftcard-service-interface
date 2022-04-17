@@ -78,7 +78,7 @@ public class Product {
     **/
    @ApiModelProperty(value = "An indication of the type of product offered through the gift card.")
    @JsonProperty("type")
-   @Pattern(regexp = "[0-9A-Za-z]{1,20}")
+   @Pattern(regexp = ".{1,50}")
    public String getType() {
       return type;
    }
